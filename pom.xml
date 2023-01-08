@@ -13,7 +13,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kowalczyk.konrad</groupId>
     <artifactId>MsgBrokerSys</artifactId>
-    <packaging>pom</packaging>
+    <packaging>pom</packaging>  <!--    in the application modules is jar, because with pom it does not see resources   -->
     <version>1.0</version>
 
     <modules>
