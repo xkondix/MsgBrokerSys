@@ -19,6 +19,9 @@
     <modules>
         <module>Utils</module>
         <module>KafkaStreams</module>
+        <module>SparkStreaming</module>
+        <module>Producer</module>
+        <module>Consumer</module>
     </modules>
 
     <properties>
