@@ -14,4 +14,13 @@
     <name>Consumer</name>
     <description>Consumer</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.kowalczyk.konrad</groupId>
+            <artifactId>Utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
 </project>
