@@ -1,0 +1,26 @@
+server:
+  port: 0
+
+
+spring:
+  cloud:
+    stream:
+      function:
+        definition: process
+        bindings:
+          input:
+            destination: Order
+          output:
+            destination: Summary
+      kafka:
+        streams:
+          binder:
+            brokers: localhost:9092
+            applicationId: test
+            configuration:
+              commit.interval.ms: 100
+              default:
+                key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                value.serde: com.kowalczyk.konrad.utils.DataSerde
+
+

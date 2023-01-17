@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaConsumer {
-    @KafkaListener(topics = "Order")
+    @KafkaListener(topics = "Summary")
     public void consume(DataModel data) {
         System.out.println(data);
     }
