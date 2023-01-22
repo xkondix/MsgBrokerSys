@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.function.Consumer;
+
 
 public class DataModel {
 
@@ -61,6 +61,19 @@ public class DataModel {
     }
 
     public DataModel() {
+    }
+
+    public String[] getList() {
+        return new String[]{date
+                , String.valueOf(value)
+                , positionCode
+                , unit
+                , averagingTime
+                , indicator
+                , stationCode
+                , String.valueOf(timestampSend)
+                , String.valueOf(timestampStream)
+                , String.valueOf(timestampConsumer)};
     }
 
 
