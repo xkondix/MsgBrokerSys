@@ -14,11 +14,13 @@ public class KafkaStreamsProcess {
     @Bean
     public Function<KStream<String, DataModel>, KStream<String, DataModel>> process(){
         return kStream ->  kStream
-                .mapValues(data -> {
-                    data.setTimestampStream(Instant.now().toEpochMilli());
-                    return data;
-                })
-                .peek((k, v) -> System.out.println(v));
+                .mapValues(data -> updateTimestampStream.apply(data))
+                .peek((key, value) -> System.out.println(value));
+    };
+
+    private Function<DataModel, DataModel> updateTimestampStream = data -> {
+        data.setTimestampStream(Instant.now().toEpochMilli());
+        return data;
     };
 
 }

@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 @Configuration
-public class ConsumerMess {
+public class ConsumerConf {
 
     @Bean
     public Consumer<KStream<String, DataModel>> consume() {
@@ -19,7 +19,7 @@ public class ConsumerMess {
                 .foreach((key, value) -> System.out.println("Consumed : " + value));
     }
 
-    public Function<DataModel, DataModel> updateTimestampConsume = data -> {
+    private Function<DataModel, DataModel> updateTimestampConsume = data -> {
         data.setTimestampConsumer(Instant.now().toEpochMilli());
         return data;
     };

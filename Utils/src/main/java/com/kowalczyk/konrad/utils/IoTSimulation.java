@@ -8,17 +8,15 @@ import javax.annotation.PostConstruct;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Component
 public class IoTSimulation {
 
-    public final Iterable<DataModel> dataList = initDataList();
+    private final Iterable<DataModel> dataList = initDataList();
 
     @PostConstruct
     private List<DataModel> initDataList() {
@@ -44,10 +42,7 @@ public class IoTSimulation {
         }
     }
 
-    public static Function<DataModel, DataModel> updateTimestamp = data -> {
-        data.setTimestampSend(Instant.now().toEpochMilli());
-        return data;
-    };
-
-
+    public Iterable<DataModel> getDataList() {
+        return dataList;
+    }
 }

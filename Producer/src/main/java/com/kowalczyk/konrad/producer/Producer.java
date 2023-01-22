@@ -9,11 +9,9 @@ import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static com.kowalczyk.konrad.utils.IoTSimulation.updateTimestamp;
 
 @Configuration
 public class Producer {
@@ -26,12 +24,16 @@ public class Producer {
 
     @Bean
     public Supplier<Flux<DataModel>> sendMessage(){
-        return () -> Flux.fromIterable(dataSource.dataList)
-                .map(updateTimestamp)
+        return () -> Flux.fromIterable(dataSource.getDataList())
+                .map(updateTimestampSend)
                 .log()
                 .delayElements(Duration.ofSeconds(1));
     };
 
+    private Function<DataModel, DataModel> updateTimestampSend = data -> {
+        data.setTimestampSend(Instant.now().toEpochMilli());
+        return data;
+    };
 
 
 }
