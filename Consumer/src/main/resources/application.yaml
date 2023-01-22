@@ -1,0 +1,23 @@
+server:
+  port : 0
+
+spring.cloud.stream:
+  function:
+    definition: consume
+  bindings:
+    consume-in-0:
+      destination: Summary
+      consumer:
+        use-native-encoding: true
+  kafka:
+    bindings:
+      consume-in-0:
+        consumer:
+          configuration:
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value.deserializer: com.kowalczyk.konrad.utils.DataDeserializer
+    binder:
+      brokers:
+        - localhost:9091
+        - localhost:9092
+        - localhost:9093

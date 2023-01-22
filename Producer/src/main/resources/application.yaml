@@ -1,0 +1,23 @@
+server:
+  port : 0
+
+spring.cloud.stream:
+  function:
+    definition: sendMessage
+  bindings:
+    sendMessage-out-0:
+      destination: Order
+      producer:
+        use-native-encoding: true
+  kafka:
+    bindings:
+      sendMessage-out-0:
+        producer:
+          configuration:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: com.kowalczyk.konrad.utils.DataSerializer
+    binder:
+      brokers:
+        - localhost:9091
+        - localhost:9092
+        - localhost:9093

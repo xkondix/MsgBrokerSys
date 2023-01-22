@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.function.Consumer;
+
 public class DataModel {
 
     private final static ObjectWriter objectWriter

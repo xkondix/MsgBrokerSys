@@ -1,36 +1,37 @@
 package com.kowalczyk.konrad.producer;
 
 import com.kowalczyk.konrad.utils.DataModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
-import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
+import com.kowalczyk.konrad.utils.IoTSimulation;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+import reactor.core.publisher.Flux;
+
+import java.time.Duration;
+import java.time.Instant;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import static com.kowalczyk.konrad.utils.IoTSimulation.updateTimestamp;
+
+@Configuration
 public class Producer {
-    public static final String TOPIC = "Order";
 
-    @Autowired
-    private KafkaTemplate kafkaTemplate;
+    private final IoTSimulation dataSource;
 
-    public void sendMessage(DataModel model){
-        ListenableFuture send = kafkaTemplate.send(TOPIC, model);
-
-        send.addCallback(new ListenableFutureCallback<SendResult<String, DataModel>>() {
-
-            @Override
-            public void onSuccess(SendResult<String, DataModel> result) {
-                System.out.println("Sent message=[" + model.toString() +
-                        "] with offset=[" + result.getRecordMetadata().offset() + "]");
-            }
-
-            @Override
-            public void onFailure(Throwable ex) {
-                System.out.println("Unable to send message=["
-                        + model.toString() + "] due to : " + ex.getMessage());
-            }
-        });
+    public Producer() {
+        this.dataSource = new IoTSimulation();
     }
+
+    @Bean
+    public Supplier<Flux<DataModel>> sendMessage(){
+        return () -> Flux.fromIterable(dataSource.dataList)
+                .map(updateTimestamp)
+                .log()
+                .delayElements(Duration.ofSeconds(1));
+    };
+
+
+
 }
