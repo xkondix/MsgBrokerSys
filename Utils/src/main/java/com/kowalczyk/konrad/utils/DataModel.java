@@ -1,12 +1,13 @@
 package com.kowalczyk.konrad.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.Getter;
 import lombok.Setter;
 
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DataModel {
 
     private final static ObjectWriter objectWriter
