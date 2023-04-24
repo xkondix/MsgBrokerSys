@@ -2,7 +2,7 @@ Spark Streaming :
 
     The application uses version 3.4.0 of spark streaming.
 
-    I use Spark Structured Streaming because DStream is deprecated.
+    I use Spark Structured Streaming because JavaStreamingContext is deprecated https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/streaming/api/java/JavaStreamingContext.html.
 
     The application uses Spring boot 2.7.10 version, because the Jersey Servlet is missing on version 3.0.5, making it unable to start properly.
 

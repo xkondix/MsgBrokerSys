@@ -5,8 +5,15 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.types.StructType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.Instant;
+
+import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.types.DataTypes.*;
+
 
 @Configuration
 public class SparkConfiguration {
@@ -43,24 +50,27 @@ public class SparkConfiguration {
                 .option("subscribe", "Order")
                 .option("startingOffsets", "earliest")
                 .load()
-                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)");
+                .selectExpr("CAST(value AS STRING)");
 
-//        df.printSchema();
-//        Dataset<Row> rowDataset = df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)");
-//        StructType add = new StructType()
-//                .add("date", StringType)
-//                .add("value", DoubleType)
-//                .add("positionCode", StringType)
-//                .add("unit", StringType)
-//                .add("averagingTime", StringType)
-//                .add("indicator", StringType)
-//                .add("stationCode", StringType)
-//                .add("timestampSend", LongType)
-//                .add("timestampStream", LongType)
-//                .add("timestampConsumer", LongType);
-//
+        StructType jsonSchema = new StructType()
+                .add("date", StringType)
+                .add("value", DoubleType)
+                .add("positionCode", StringType)
+                .add("unit", StringType)
+                .add("averagingTime", StringType)
+                .add("indicator", StringType)
+                .add("stationCode", StringType)
+                .add("timestampSend", LongType)
+                .add("timestampStream", LongType)
+                .add("timestampConsumer", LongType);
 
-        df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+
+        Dataset<Row> rowDataset = df.select(from_json(col("value"), jsonSchema).as("data"))
+                .select("data.*")
+                .withColumn("timestampStream", lit(Instant.now().toEpochMilli()));
+
+
+        rowDataset.selectExpr("CAST(null AS STRING) AS key", "to_json(struct(*)) AS value")
                 .writeStream()
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
@@ -68,6 +78,4 @@ public class SparkConfiguration {
                 .option("checkpointLocation", "C:\\checkpoint")
                 .start();
     }
-
-
 }
