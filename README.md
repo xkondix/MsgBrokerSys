@@ -59,6 +59,8 @@ Requirements to run the application:
 - in my case, I had to add paths to Apache Hadoop folders to VM options [4]
 - if you want to process data from kafka, then you need to run the zookeeper and kafka image from docker compose file
 - in order to process the data it is necessary to start the Producer service (sends data to the topic Order)
+- create a folder to store archive data [5]
+
 
 
 Spark Structured Streaming [1] ->
@@ -90,6 +92,12 @@ VM options [4] ->
 
 ![image](https://user-images.githubusercontent.com/52525583/235370169-230fab69-517a-4008-b66f-acc1f7ced9d9.png)
 
+
+Archive data [5] -> 
+Create a folder and add a path in the SparkConfiguration class. In my case it is ".option("checkpointLocation", "C:\\checkpoint")".
+Read more here https://spark.apache.org/docs/latest/structured-streaming-programming-gu.
+
+![image](https://user-images.githubusercontent.com/52525583/235376976-86ff5110-c248-4dbc-9998-6dee3ad98fe0.png)
 
 --------------------------------------------------------------------------------------------------------------
     
