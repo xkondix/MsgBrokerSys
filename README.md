@@ -17,7 +17,7 @@ The application includes 5 modules:
 - Consumer
 - Utils
 
-Below is a description and requirements of each service and docker-compse file
+Below is a description and requirements of each service and docker-compse file.
 
 
 --------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ The service is designed to process data in real time. The entry point is a Kafka
 
 
 Information about the application:
-- uses version 3.4.0 of spark libraries.
+- uses version 3.4.0 of spark libraries
 - uses Spark Structured Streaming to process the stream [1]
 - uses Java 17
 - uses Spring boot 2.7.10 version [2]
@@ -107,7 +107,7 @@ The service is designed to process data in real time. The entry point is a Kafka
 
 
 Information about the application:
-- uses version 3.3.2 of kafka libraries.
+- uses version 3.3.2 of kafka libraries
 - uses Java 17
 - uses Spring boot 3.0.5 version 
 - uses spring-cloud-stream-binder-kafka-streams to bind configuration from yaml file
