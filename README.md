@@ -1,4 +1,4 @@
-Spark Streaming:
+### Spark Streaming:
 
 The service is designed to process data in real time. The entry point is a Kafka Topic called Order, and the exit point is a Kafka Topic called Summary.
 
@@ -16,7 +16,7 @@ Requirements to run the application:
 - if you have a windows system, you need to move additional files to the bin folder of the Apache Hadoop application [3]
 - in my case, I had to add paths to Apache Hadoop folders to VM options [4]
 - if you want to process data from kafka, then you need to run the zookeeper and kafka image from docker compose file
-- to produce data you need to run the Producer service
+- in order to process the data it is necessary to start the Producer service (sends data to the topic Order)
 
 
 Spark Structured Streaming [1] ->
@@ -51,4 +51,20 @@ VM options [4] ->
 
 --------------------------------------------------------------------------------------------------------------
     
-Kafka Streams:
+### Kafka Streams:
+
+The service is designed to process data in real time. The entry point is a Kafka Topic called Order, and the exit point is a Kafka Topic called Summary.
+
+
+Information about the application:
+- uses version 3.3.2 of kafka libraries.
+- uses Java 17
+- uses Spring boot 3.0.5 version 
+- uses spring-cloud-stream-binder-kafka-streams to bind configuration from yaml file
+
+
+Requirements to run the application:
+- run the zookerpara and broker images that are in the docker-compose file
+- in order to process the data it is necessary to start the Producer service (sends data to the topic Order)
+
+--------------------------------------------------------------------------------------------------------------
