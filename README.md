@@ -95,7 +95,7 @@ VM options [4] ->
 
 Archive data [5] -> 
 Create a folder and add a path in the SparkConfiguration class. In my case it is ".option("checkpointLocation", "C:\\checkpoint")".
-Read more here https://spark.apache.org/docs/latest/structured-streaming-programming-gu.
+Read more here https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html.
 
 ![image](https://user-images.githubusercontent.com/52525583/235376976-86ff5110-c248-4dbc-9998-6dee3ad98fe0.png)
 
