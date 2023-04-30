@@ -1,3 +1,21 @@
+### docker-compose.yaml
+
+The docker-compose file contains a zookeeper image, 3 kafka brokers and a manager that makes it easy to preview the port http://localhost:9000/ kafka cluster.
+
+
+Information about image versions:
+- confluentinc/cp-zookeeper:7.0.3
+- confluentinc/cp-kafka:7.0.3
+- ghcr.io/eshepelyuk/dckr/cmak-3.0.0.6:latest
+
+
+Links to source:
+- https://hub.docker.com/r/confluentinc/cp-kafka
+- https://hub.docker.com/r/confluentinc/cp-zookeeper
+- https://github.com/eshepelyuk/cmak-docker/pkgs/container/dckr%2Fcmak-3.0.0.6
+
+--------------------------------------------------------------------------------------------------------------
+
 ### Spark Streaming:
 
 The service is designed to process data in real time. The entry point is a Kafka Topic called Order, and the exit point is a Kafka Topic called Summary.
