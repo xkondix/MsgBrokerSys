@@ -1,4 +1,28 @@
-### docker-compose.yaml
+# MsgBrokerSys
+
+App is designed to compare Kafka Streams with Apache Spark Structed Streaming. The application was created based on multiple modules with their own pom files and set as the parent of the main pom. The exception is the Spark Streming application, which has Spring Boot 3.7.10 as a parent.
+
+Before starting the services, you need to run the docker-compose.yaml file once. This file downloads the images in the given configuration. The next step is to run these images, for this you can use Docker Desktop application.
+
+![image](https://user-images.githubusercontent.com/52525583/235375242-7946f5a2-f7b9-4ab2-b901-c0b653a68640.png)
+
+
+The project also includes data files such as "DsDusznikMOB_PM25.csv." These files provide data to the Producer service, which sends them to the topic Order.
+
+
+The application includes 5 modules:
+- SparkStreaming
+- KafkaStreams
+- Producer
+- Consumer
+- Utils
+
+Below is a description and requirements of each service and docker-compse file
+
+
+--------------------------------------------------------------------------------------------------------------
+
+## docker-compose.yaml
 
 The docker-compose file contains a zookeeper image, 3 kafka brokers and a manager that makes it easy to preview the port http://localhost:9000/ kafka cluster.
 
@@ -16,7 +40,7 @@ Links to source:
 
 --------------------------------------------------------------------------------------------------------------
 
-### Spark Streaming:
+## SparkStreaming:
 
 The service is designed to process data in real time. The entry point is a Kafka Topic called Order, and the exit point is a Kafka Topic called Summary.
 
@@ -69,7 +93,7 @@ VM options [4] ->
 
 --------------------------------------------------------------------------------------------------------------
     
-### Kafka Streams:
+## KafkaStreams:
 
 The service is designed to process data in real time. The entry point is a Kafka Topic called Order, and the exit point is a Kafka Topic called Summary.
 
@@ -87,7 +111,7 @@ Requirements to run the application:
 
 --------------------------------------------------------------------------------------------------------------
 
-### Producer:
+## Producer:
 
 The service is designed to simulate an IoT device. It is the responsibility of the service to retrieve data from the csv file and send it to the topic Order.
 
@@ -102,7 +126,7 @@ Requirements to run the application:
 
 --------------------------------------------------------------------------------------------------------------
 
-### Consumer:
+## Consumer:
 
 The service is designed to receive data from the Summary topic and save it to a file.
 
@@ -118,7 +142,7 @@ Requirements to run the application:
 
 --------------------------------------------------------------------------------------------------------------
 
-### Utils:
+## Utils:
 
 The service is designed to store classes needed by other services. The reason for the service is the possibility of duplication of classes in each service.
 
