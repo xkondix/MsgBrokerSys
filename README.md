@@ -68,3 +68,43 @@ Requirements to run the application:
 - in order to process the data it is necessary to start the Producer service (sends data to the topic Order)
 
 --------------------------------------------------------------------------------------------------------------
+
+### Producer:
+
+The service is designed to simulate an IoT device. It is the responsibility of the service to retrieve data from the csv file and send it to the topic Order.
+
+
+Information about the application:
+- uses Java 17
+- uses Spring boot 3.0.5 version 
+- uses spring-cloud-stream-binder-kafka-streams to bind configuration from yaml file
+
+Requirements to run the application:
+- run the zookerpara and broker images that are in the docker-compose file
+
+--------------------------------------------------------------------------------------------------------------
+
+### Consumer:
+
+The service is designed to receive data from the Summary topic and save it to a file.
+
+
+Information about the application:
+- uses Java 17
+- uses Spring boot 3.0.5 version 
+- uses spring-cloud-stream-binder-kafka-streams to bind configuration from yaml file
+
+Requirements to run the application:
+- run the zookerpara and broker images that are in the docker-compose file
+- requires a running Kafka Stream or Spark Streaming service to process the data
+
+--------------------------------------------------------------------------------------------------------------
+
+### Utils:
+
+The service is designed to store classes needed by other services. The reason for the service is the possibility of duplication of classes in each service.
+
+
+Information about the application:
+- uses Java 17
+- uses Spring boot 3.0.5 version 
