@@ -23,14 +23,14 @@ public class Producer {
     }
 
     @Bean
-    public Supplier<Flux<DataModel>> sendMessage(){
+    public Supplier<Flux<DataModel>> sendMessage() {
         return () -> Flux.fromIterable(dataSource.getDataList())
                 .map(updateTimestampSend)
                 .log()
                 .delayElements(Duration.ofSeconds(1));
-    };
+    }
 
-    private Function<DataModel, DataModel> updateTimestampSend = data -> {
+    private final Function<DataModel, DataModel> updateTimestampSend = data -> {
         data.setTimestampSend(Instant.now().toEpochMilli());
         return data;
     };
