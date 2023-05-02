@@ -17,6 +17,12 @@ The application includes 5 modules:
 - Consumer
 - Utils
 
+The "results" folder stores the results of the tests performed. On the master branch tests are performed for Kafka and Spark.
+The tests were executed with a delay ".delayElements(Duration.ofMillis(50));". For each test, you must change the file name in the ConsumerConf class in the writeDataAtOnce method.
+
+![image](https://user-images.githubusercontent.com/52525583/235783861-79d2da5a-ecf4-49a9-b6fb-a18235660928.png)
+
+
 Below is a description and requirements of each service and docker-compse file.
 
 
