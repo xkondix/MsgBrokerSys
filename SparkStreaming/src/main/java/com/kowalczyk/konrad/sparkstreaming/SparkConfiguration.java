@@ -42,17 +42,8 @@ public class SparkConfiguration {
     }
 
     @Bean
-    public void inputDf() throws Exception {
-        Dataset<Row> df = sparkSession()
-                .readStream()
-                .format("kafka")
-                .option("kafka.bootstrap.servers", "localhost:9092")
-                .option("subscribe", "Order")
-                .option("startingOffsets", "earliest")
-                .load()
-                .selectExpr("CAST(value AS STRING)");
-
-        StructType jsonSchema = new StructType()
+    public StructType getSchema() {
+        return new StructType()
                 .add("date", StringType)
                 .add("value", DoubleType)
                 .add("positionCode", StringType)
@@ -63,12 +54,22 @@ public class SparkConfiguration {
                 .add("timestampSend", LongType)
                 .add("timestampStream", LongType)
                 .add("timestampConsumer", LongType);
+    }
 
+    @Bean
+    public void process() throws Exception {
+        Dataset<Row> df = sparkSession()
+                .readStream()
+                .format("kafka")
+                .option("kafka.bootstrap.servers", "localhost:9092")
+                .option("subscribe", "Order")
+                .option("startingOffsets", "earliest")
+                .load()
+                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)");
 
-        Dataset<Row> rowDataset = df.select(from_json(col("value"), jsonSchema).as("data"))
+        Dataset<Row> rowDataset = df.select(from_json(col("value"), getSchema()).as("data"))
                 .select("data.*")
                 .withColumn("timestampStream", lit(Instant.now().toEpochMilli()));
-
 
         rowDataset.selectExpr("CAST(null AS STRING) AS key", "to_json(struct(*)) AS value")
                 .writeStream()
@@ -76,6 +77,7 @@ public class SparkConfiguration {
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("topic", "Summary")
                 .option("checkpointLocation", "C:\\checkpoint")
-                .start();
+                .start()
+                .awaitTermination();
     }
 }

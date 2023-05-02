@@ -16,7 +16,7 @@ public class SparkStreamingProcess {
 
     @PostConstruct
     public void startStreamTask() throws Exception {
-        sparkConfiguration.inputDf();
+        sparkConfiguration.process();
     }
 
 
