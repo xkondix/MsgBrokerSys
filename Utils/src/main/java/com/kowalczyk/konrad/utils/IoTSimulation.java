@@ -24,8 +24,8 @@ public class IoTSimulation {
         try {
             String path = Paths.get("./DsDusznikMOB_PM25.csv").toAbsolutePath().normalize().toString();
             CSVReader reader = new CSVReaderBuilder(new FileReader(path)).build();
-            List<DataModel> collect = StreamSupport.stream(reader.spliterator(), false).map((String[] line) -> mapToDataModel(line)).collect(Collectors.toList());
-            return collect;
+            return StreamSupport.stream(reader.spliterator(), false)
+                    .map(this::mapToDataModel).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
         }
