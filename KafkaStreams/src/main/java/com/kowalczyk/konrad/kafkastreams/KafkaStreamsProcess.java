@@ -12,13 +12,13 @@ import java.util.function.Function;
 public class KafkaStreamsProcess {
 
     @Bean
-    public Function<KStream<String, DataModel>, KStream<String, DataModel>> process(){
+    public Function<KStream<String, DataModel>, KStream<String, DataModel>> process() {
         return kStream ->  kStream
-                .mapValues(data -> updateTimestampStream.apply(data))
+                .mapValues(updateTimestampStream::apply)
                 .peek((key, value) -> System.out.println(value));
-    };
+    }
 
-    private Function<DataModel, DataModel> updateTimestampStream = data -> {
+    private final Function<DataModel, DataModel> updateTimestampStream = data -> {
         data.setTimestampStream(Instant.now().toEpochMilli());
         return data;
     };
