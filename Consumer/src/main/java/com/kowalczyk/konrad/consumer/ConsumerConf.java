@@ -26,19 +26,17 @@ public class ConsumerConf {
                 .foreach((key, value) -> System.out.println("Consumed : " + value));
     }
 
-    private Function<DataModel, DataModel> updateTimestampConsume = data -> {
+    private final Function<DataModel, DataModel> updateTimestampConsume = data -> {
         data.setTimestampConsumer(Instant.now().toEpochMilli());
         return data;
     };
 
 
-    private void writeDataAtOnce(DataModel dataModel)
-    {
+    private void writeDataAtOnce(DataModel dataModel) {
 
         // first create file object for file placed at location
         // specified by filepath
-        File file = new File("test.csv");
-
+        File file = new File("results\\test.csv");
         try {
             // create FileWriter object with file as parameter
             FileWriter outputfile = new FileWriter(file, true);
@@ -55,7 +53,6 @@ public class ConsumerConf {
             writer.close();
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
