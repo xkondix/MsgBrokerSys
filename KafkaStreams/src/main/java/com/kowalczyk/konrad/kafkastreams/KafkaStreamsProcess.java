@@ -14,8 +14,7 @@ public class KafkaStreamsProcess {
     @Bean
     public Function<KStream<String, DataModel>, KStream<String, DataModel>> process() {
         return kStream ->  kStream
-                .mapValues(updateTimestampStream::apply)
-                .peek((key, value) -> System.out.println(value));
+                .mapValues(updateTimestampStream::apply);
     }
 
     private final Function<DataModel, DataModel> updateTimestampStream = data -> {
