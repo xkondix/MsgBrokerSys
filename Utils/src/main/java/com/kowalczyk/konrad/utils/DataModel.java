@@ -32,9 +32,6 @@ public class DataModel {
     private long timestampSend;
     @Setter
     @Getter
-    private long timestampStream;
-    @Setter
-    @Getter
     private long timestampConsumer;
 
 
@@ -48,7 +45,7 @@ public class DataModel {
         this.stationCode = stationCode;
     }
 
-    public DataModel(String date, double value, String positionCode, String unit, String averagingTime, String indicator, String stationCode, long timestampSend, long timestampStream, long timestampConsumer) {
+    public DataModel(String date, double value, String positionCode, String unit, String averagingTime, String indicator, String stationCode, long timestampSend, long timestampConsumer) {
         this.date = date;
         this.value = value;
         this.positionCode = positionCode;
@@ -57,7 +54,6 @@ public class DataModel {
         this.indicator = indicator;
         this.stationCode = stationCode;
         this.timestampSend = timestampSend;
-        this.timestampStream = timestampStream;
         this.timestampConsumer = timestampConsumer;
     }
 
@@ -73,7 +69,6 @@ public class DataModel {
                 , indicator
                 , stationCode
                 , String.valueOf(timestampSend)
-                , String.valueOf(timestampStream)
                 , String.valueOf(timestampConsumer)};
     }
 
