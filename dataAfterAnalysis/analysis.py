@@ -333,7 +333,7 @@ if coutKafkaDelay0Half > 0:
     # kafkaDelay0Half removal of data beyond deviation from the mean
     kafkaDelay0HalfLowerBound = kafkaDelay0HalfMean - 3 * kafkaDelay0HalfStdDev
     kafkaDelay0HalfUpperBound = kafkaDelay0HalfMean + 3 * kafkaDelay0HalfStdDev
-    filtered_data = np.where(np.logical_or(kafkaDelay0HalfResults < kafkaDelay0HalfLowerBound, kafkaDelay0HalfResults > kafkaDelay0HalfUpperBound), np.nan, kafkaDelay0HalfResults)
+    kafkaDelay0HalfFilteredData = np.where(np.logical_or(kafkaDelay0HalfResults < kafkaDelay0HalfLowerBound, kafkaDelay0HalfResults > kafkaDelay0HalfUpperBound), np.nan, kafkaDelay0HalfResults)
 
     # kafkaDelay0Half Histogram
     plt.hist(kafkaDelay0HalfResults, bins=100)
@@ -359,7 +359,7 @@ if coutKafkaDelay0Half > 0:
     plt.clf()
 
     # kafkaDelay0Half filtered Histogram
-    plt.hist(kafkaDelay0FullFilteredData, bins=100)
+    plt.hist(kafkaDelay0HalfFilteredData, bins=100)
     plt.title('Kafka Histogram delay 0ms half (filtered)')
     plt.xlabel('Time (s)')
     plt.ylabel('Frequency')
@@ -367,7 +367,7 @@ if coutKafkaDelay0Half > 0:
     plt.clf()
 
     # kafkaDelay0Half filtered Line Chart
-    plt.plot(kafkaDelay0FullFilteredData)
+    plt.plot(kafkaDelay0HalfFilteredData)
     plt.title('Kafka Line Chart delay 0ms half (filtered)')
     plt.ylabel('Time (s)')
     plt.xlabel('Number of occurrences')
@@ -796,6 +796,7 @@ if coutSparkDelay0Half > 0:
         inchValue -=3
         if inchValue < 0 :
             inchValue = 7
+            canvas.showPage()
     canvas.showPage()
 
 canvas.save()
