@@ -154,8 +154,10 @@ if(coutKafkaDelay3Full > 0 ):
                 "Liczba przeprowadzonych testów": coutKafkaDelay3Full,
                 "Start": "Znacznik czasowy od Producenta",
                 "Koniec": "Znacznik czasowy od Konsumenta",
+                "Jednostka": "Wyniki czasowe są podane w sekundach"
+
             },
-            "Kafka wartości mediany": {
+            "Kafka mediana": {
                 "Różnica Koniec - Start": kafkaDelay3FullMedian
             },
             "Kafka odchylenie standardowe": {
@@ -307,10 +309,12 @@ if coutKafkaDelay0Full > 0:
             "Opóźnienie producenta (wysłanie kolejnej wiadomości)": "0ms",
             "Pełny zbiór danych (ilość)": len(kafkaDelay0FullResults),
             "Liczba wykonanych testów": coutKafkaDelay0Full,
-            "Start": "Timestamp od producenta",
-            "Koniec": "Timestamp od konsumenta",
+            "Start": "Znacznik czasowy od Producenta",
+            "Koniec": "Znacznik czasowy od Konsumenta",
+            "Jednostka": "Wyniki czasowe są podane w sekundach"
+
         },
-        "Kafka wartości mediany": {
+        "Kafka mediana": {
             "Różnica Koniec - Start": kafkaDelay0FullMedian
         },
         "Kafka odchylenie standardowe": {
@@ -464,8 +468,10 @@ if coutKafkaDelay0Half > 0:
             "Liczba przeprowadzonych testów": coutKafkaDelay0Half,
             "Start": "Znacznik czasowy od Producenta",
             "Koniec": "Znacznik czasowy od Konsumenta",
+            "Jednostka": "Wyniki czasowe są podane w sekundach"
+
         },
-        "Kafka wartości mediany": {
+        "Kafka mediana": {
             "Różnica Koniec - Start": kafkaDelay0HalfMedian
         },
         "Kafka odchylenie standardowe": {
@@ -616,8 +622,10 @@ if coutSparkDelay3Full > 0:
             "Liczba przeprowadzonych testów": coutSparkDelay3Full,
             "Start": "Znacznik czasowy od Producenta",
             "Koniec": "Znacznik czasowy od Konsumenta",
+            "Jednostka": "Wyniki czasowe są podane w sekundach"
+
         },
-        "Spark wartości mediany": {
+        "Spark mediana": {
             "Różnica Koniec - Start": sparkDelay3FullMedian
         },
         "Spark odchylenie standardowe": {
@@ -769,8 +777,10 @@ if coutSparkDelay0Full > 0:
             "Liczba przeprowadzonych testów": coutSparkDelay0Full,
             "Start": "Znacznik czasowy od Producenta",
             "Koniec": "Znacznik czasowy od Konsumenta",
+            "Jednostka": "Wyniki czasowe są podane w sekundach"
+
         },
-        "Spark wartości median": {
+        "Spark mediana": {
             "Różnica Koniec - Start": sparkDelay0FullMedian
         },
         "Spark odchylenie standardowe": {
@@ -923,8 +933,10 @@ if coutSparkDelay0Half > 0:
         "Liczba przeprowadzonych testów": coutSparkDelay0Half,
         "Start": "Znacznik czasowy od Producenta",
         "Koniec": "Znacznik czasowy od Konsumenta",
+        "Jednostka": "Wyniki czasowe są podane w sekundach"
+
     },
-    "Spark wartości mediany": {
+    "Spark mediana": {
         "Różnica Koniec - Start": sparkDelay0HalfMedian
     },
     "Spark  odchylenie standardowe": {
