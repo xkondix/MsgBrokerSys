@@ -150,6 +150,7 @@ if(coutKafkaDelay3Full > 0 ):
             "Number of tests performed": coutKafkaDelay3Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
+            "Unit": "The results are given in seconds"
         },
         "Kafka median values": {
             "End Subtract Start": kafkaDelay3FullMedian
@@ -305,6 +306,7 @@ if coutKafkaDelay0Full > 0:
             "Number of tests performed": coutKafkaDelay0Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
+            "Unit": "The results are given in seconds"
         },
         "Kafka median values": {
             "End Subtract Start": kafkaDelay0FullMedian
@@ -460,6 +462,7 @@ if coutKafkaDelay0Half > 0:
             "Number of tests performed": coutKafkaDelay0Half,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
+            "Unit": "The results are given in seconds"
         },
         "Kafka median values": {
             "End Subtract Start": kafkaDelay0HalfMedian
@@ -612,6 +615,7 @@ if coutSparkDelay3Full > 0:
             "Number of tests performed": coutSparkDelay3Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
+            "Unit": "The results are given in seconds"
         },
         "Spark median values": {
             "End Subtract Start": sparkDelay3FullMedian
@@ -765,6 +769,7 @@ if coutSparkDelay0Full > 0:
             "Number of tests performed": coutSparkDelay0Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
+            "Unit": "The results are given in seconds"
         },
         "Spark median values": {
             "End Subtract Start": sparkDelay0FullMedian
@@ -919,6 +924,7 @@ if coutSparkDelay0Half > 0:
         "Number of tests performed": coutSparkDelay0Half,
         "Start": "Timestamp from Producer",
         "End": "Timestamp from Consumer",
+        "Unit": "The results are given in seconds"
     },
     "Spark median values": {
         "End Subtract Start": sparkDelay0HalfMedian
