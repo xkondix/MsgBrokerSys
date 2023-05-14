@@ -12,7 +12,7 @@ Examples of results used for test below (folder "results"), instead of *, insert
 - test_spark_d0_full_*
 - test_spark_d0_half_*
 
-Charts and reports created from the results in the "dataAfterAnalysis" folder.
+The charts and reports created from the results are located in the "dataAfterAnalysis" folder.
 
 ## kafkaDelay3Full										
 											
