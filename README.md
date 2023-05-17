@@ -1,6 +1,16 @@
 # MsgBrokerSys
 
-App is designed to compare Kafka Streams with Apache Spark Structed Streaming. The application was created based on multiple modules with their own pom files and set as the parent of the main pom. The exception is the Spark Streming application, which has Spring Boot 2.7.10 as a parent.
+The App is designed to compare Kafka Streams with Apache Spark Structed Streaming. The application was created based on multiple modules with their own pom files and set as the parent of the main pom. The exception is the Spark Streming application, which has Spring Boot 2.7.10 as a parent.
+
+On the test-0 branch there are tests that compare whether data from x samples are similar. On the test-1 to test-15 branch, tests will be performed in different configurations. More description of these branches in the README.md file.
+
+The App includes a script written in python for data analysis. The name of the save files can be changed in the ConsumerConf class. The save files are used by a script (unfortunately not written according to the art, but simply to understand) that generates graphs and pdf reportd.
+
+On each branch you can check what naming I used for the results in the results folder. The folder dataAfterAnalysis contains the script, charts and the pdf.
+For example:
+
+![image](https://github.com/xkondix/MsgBrokerSys/assets/52525583/c010b295-d383-4660-a2e0-dea2bc94819f)
+
 
 Before starting the services, you need to run the docker-compose.yaml file once. This file downloads the images in the given configuration. The next step is to run these images, for this you can use Docker Desktop application.
 

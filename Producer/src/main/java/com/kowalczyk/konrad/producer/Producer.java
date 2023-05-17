@@ -12,6 +12,8 @@ import java.time.Instant;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static com.kowalczyk.konrad.utils.CurrentTime.getCurrentTimeInstance;
+
 
 @Configuration
 public class Producer {
@@ -26,11 +28,11 @@ public class Producer {
     public Supplier<Flux<DataModel>> sendMessage() {
         return () -> Flux.fromIterable(dataSource.getDataList())
                 .map(updateTimestampSend)
-                .delayElements(Duration.ofMillis(5));
+                .delayElements(Duration.ofMillis(3));
     }
 
     private final Function<DataModel, DataModel> updateTimestampSend = data -> {
-        data.setTimestampSend(Instant.now().toEpochMilli());
+        data.setTimestampSend(getCurrentTimeInstance().getCurrentTimeInMillis());
         return data;
     };
 

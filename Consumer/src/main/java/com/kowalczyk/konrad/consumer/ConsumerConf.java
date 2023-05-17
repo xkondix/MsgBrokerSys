@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import static com.kowalczyk.konrad.utils.CurrentTime.getCurrentTimeInstance;
+
 
 @Configuration
 public class ConsumerConf {
@@ -27,7 +29,7 @@ public class ConsumerConf {
     }
 
     private final Function<DataModel, DataModel> updateTimestampConsume = data -> {
-        data.setTimestampConsumer(Instant.now().toEpochMilli());
+        data.setTimestampConsumer(getCurrentTimeInstance().getCurrentTimeInMillis());
         return data;
     };
 
@@ -36,7 +38,7 @@ public class ConsumerConf {
 
         // first create file object for file placed at location
         // specified by filepath
-        File file = new File("results\\test.csv");
+        File file = new File("results\\test_kafka_1.csv");
         try {
             // create FileWriter object with file as parameter
             FileWriter outputfile = new FileWriter(file, true);

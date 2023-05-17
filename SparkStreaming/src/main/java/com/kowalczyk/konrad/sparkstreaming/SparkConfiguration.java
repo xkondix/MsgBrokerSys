@@ -9,9 +9,6 @@ import org.apache.spark.sql.types.StructType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.Instant;
-
-import static org.apache.spark.sql.functions.*;
 import static org.apache.spark.sql.types.DataTypes.*;
 
 
@@ -64,19 +61,16 @@ public class SparkConfiguration {
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("subscribe", "Order")
                 .option("startingOffsets", "earliest")
+                .option("failOnDataLoss", "true")
                 .load()
                 .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)");
 
-        Dataset<Row> rowDataset = df.select(from_json(col("value"), getSchema()).as("data"))
-                .select("data.*")
-                .withColumn("timestampStream", lit(Instant.now().toEpochMilli()));
-
-        rowDataset.selectExpr("CAST(null AS STRING) AS key", "to_json(struct(*)) AS value")
-                .writeStream()
+        df.writeStream()
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("topic", "Summary")
                 .option("checkpointLocation", "C:\\checkpoint")
+                .option("idempotent", "true")
                 .start()
                 .awaitTermination();
     }
