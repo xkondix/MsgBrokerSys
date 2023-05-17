@@ -2,6 +2,8 @@ package com.kowalczyk.konrad.sparkstreaming;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.StructType;
 import org.springframework.context.annotation.Bean;
@@ -53,7 +55,7 @@ public class SparkConfiguration {
 
     @Bean
     public void process() throws Exception {
-        sparkSession()
+        Dataset<Row> df = sparkSession()
                 .readStream()
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
@@ -61,8 +63,9 @@ public class SparkConfiguration {
                 .option("startingOffsets", "earliest")
                 .option("failOnDataLoss", "true")
                 .load()
-                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
-                .writeStream()
+                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)");
+
+        df.writeStream()
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("topic", "Summary")
