@@ -174,3 +174,34 @@ The service is designed to store classes needed by other services. The reason fo
 Information about the application:
 - uses Java 17
 - uses Spring boot 3.0.5 version 
+
+--------------------------------------------------------------------------------------------------------------
+
+## Python script for data analysis ("analysis_en.py", "analysis_pl.py")
+
+The script was created for data analysis. The script creates charts, which it places in the charst_en or chart_pl folder, depending on which language you run it in (There are 2 versions, Polish and English). The script also creates pdfs, also in 2 languages depending on which one you run it. The script is written in a simple way, unfortunately it is not a very clean solution, but it is very easy to understand. The script contains 6 same sections that perform calculations for the given data.
+
+
+Information about the script:
+- uses Python 3
+- uses numpy (pip install numpy)
+- uses matplotlib (pip install matplotlib)
+- uses reportlab (pip install reportlab)
+
+Examples of results used for script below (folder "results"), instead of *, insert numbers from 1-10 (There are 10 repetitions in tests 1-15, the number chosen based on the test-0 branch):
+
+test_kafka_d3_full_*
+
+test_kafka_d0_full_*
+
+test_kafka_d0_half_*
+
+test_spark_d3_full_*
+
+test_spark_d0_full_*
+
+test_spark_d0_half_*
+
+The charts and reports created from the test results are located in the "dataAfterAnalysis" folder.
+
+--------------------------------------------------------------------------------------------------------------
