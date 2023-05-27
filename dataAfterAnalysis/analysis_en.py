@@ -12,6 +12,7 @@ parentPath = os.path.dirname(currentPath)
 grandparentPath = os.path.dirname(parentPath)
 pathToResults = grandparentPath + "\\results\\"
 pathToSaveCharts = parentPath + "\\charts_en\\"
+pathToSourceFile = grandparentPath +"\\DsDusznikMOB_PM25.csv"
 
 # Create PDF report
 canvas = canvas.Canvas(parentPath + "\\report_en.pdf", pagesize=letter)
@@ -44,6 +45,15 @@ coutSparkDelay3Full = sum([1 for f in os.listdir(pathToResults) if "test_spark_d
 coutSparkDelay0Full = sum([1 for f in os.listdir(pathToResults) if "test_spark_d0_full" in f])
 coutSparkDelay0Half = sum([1 for f in os.listdir(pathToResults) if "test_spark_d0_half" in f])
 
+
+countNonEmptyLine = 0
+
+with open(pathToSourceFile, 'r') as file:
+    csv_reader = csv.reader(file)
+
+    for row in csv_reader:
+        if any(row):
+            countNonEmptyLine += 1
 
 #kafkaDelay3Full ------------------------------------------------------------------------------
 
@@ -146,7 +156,8 @@ if(coutKafkaDelay3Full > 0 ):
         "Kafka test setup (kafkaDelay3Full)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "3ms",
-            "Full data set (qty)": len(kafkaDelay3FullResults),
+            "Full data set (qty)": countNonEmptyLine,
+            "Processed values (qty)": len(kafkaDelay3FullResults),
             "Number of tests performed": coutKafkaDelay3Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -302,7 +313,8 @@ if coutKafkaDelay0Full > 0:
         "Kafka test setup (kafkaDelay0Full)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(kafkaDelay0FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(kafkaDelay0FullResults),
             "Number of tests performed": coutKafkaDelay0Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -458,7 +470,8 @@ if coutKafkaDelay0Half > 0:
         "Kafka test setup (kafkaDelay0Half)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(kafkaDelay0HalfResults),
+            "Full data set (qty)": countNonEmptyLine,
+            "Processed values (qty)": len(kafkaDelay0HalfResults),
             "Number of tests performed": coutKafkaDelay0Half,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -611,7 +624,8 @@ if coutSparkDelay3Full > 0:
         "Spark test setup (sparkDelay3Full)": {
             "Technology": "Spark Structured Streaming",
             "Producer Delay (Send next message)": "3ms",
-            "Full data set (qty)": len(sparkDelay3FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(sparkDelay3FullResults),
             "Number of tests performed": coutSparkDelay3Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -765,7 +779,8 @@ if coutSparkDelay0Full > 0:
         "Spark test setup (sparkDelay0Full)": {
             "Technology": "Spark Structured Streaming",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(sparkDelay0FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(sparkDelay0FullResults),
             "Number of tests performed": coutSparkDelay0Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -920,7 +935,8 @@ if coutSparkDelay0Half > 0:
     "Spark test setup (sparkDelay0Half)": {
         "Technology": "Spark Structured Streaming",
         "Producer Delay (Send next message)": "0ms",
-        "Full data set (qty)": len(sparkDelay0HalfResults),
+        "Full data set (qty)":  countNonEmptyLine,
+        "Processed values (qty)": len(sparkDelay0HalfResults),
         "Number of tests performed": coutSparkDelay0Half,
         "Start": "Timestamp from Producer",
         "End": "Timestamp from Consumer",
