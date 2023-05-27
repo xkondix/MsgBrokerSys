@@ -49,7 +49,6 @@ public class SparkConfiguration {
                 .add("indicator", StringType)
                 .add("stationCode", StringType)
                 .add("timestampSend", LongType)
-                .add("timestampStream", LongType)
                 .add("timestampConsumer", LongType);
     }
 
