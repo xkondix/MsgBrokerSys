@@ -13,6 +13,7 @@ parentPath = os.path.dirname(currentPath)
 grandparentPath = os.path.dirname(parentPath)
 pathToResults = grandparentPath + "\\results\\"
 pathToSaveCharts = parentPath + "\\charts_pl\\"
+pathToSourceFile = grandparentPath +"\\DsDusznikMOB_PM25.csv"
 pdfmetrics.registerFont(TTFont('Arial-Bold', 'arialbd.ttf'))
 pdfmetrics.registerFont(TTFont('Arial', 'arial.ttf'))
 
@@ -48,6 +49,15 @@ coutSparkDelay3Full = sum([1 for f in os.listdir(pathToResults) if "test_spark_d
 coutSparkDelay0Full = sum([1 for f in os.listdir(pathToResults) if "test_spark_d0_full" in f])
 coutSparkDelay0Half = sum([1 for f in os.listdir(pathToResults) if "test_spark_d0_half" in f])
 
+
+countNonEmptyLine = 0
+
+with open(pathToSourceFile, 'r') as file:
+    csv_reader = csv.reader(file)
+
+    for row in csv_reader:
+        if any(row):
+            countNonEmptyLine += 1
 
 #kafkaDelay3Full ------------------------------------------------------------------------------
 
@@ -150,7 +160,8 @@ if(coutKafkaDelay3Full > 0 ):
             "Konfiguracja testu Kafka (kafkaDelay3Full)": {
                 "Technologia": "Kafka Streams",
                 "Opóźnienie producenta (wysłanie następnej wiadomości)": "3ms",
-                "Pełny zbiór danych (ilość)": len(kafkaDelay3FullResults),
+                "Pełny zbiór danych (ilość)": countNonEmptyLine,
+                "Przetworzone wartości (ilość)": len(kafkaDelay3FullResults),
                 "Liczba przeprowadzonych testów": coutKafkaDelay3Full,
                 "Start": "Znacznik czasowy od Producenta",
                 "Koniec": "Znacznik czasowy od Konsumenta",
@@ -307,7 +318,8 @@ if coutKafkaDelay0Full > 0:
         "Konfiguracja testu Kafka (kafkaDelay0Full)": {
             "Technologia": "Kafka Streams",
             "Opóźnienie producenta (wysłanie kolejnej wiadomości)": "0ms",
-            "Pełny zbiór danych (ilość)": len(kafkaDelay0FullResults),
+            "Pełny zbiór danych (ilość)": countNonEmptyLine,
+            "Przetworzone wartości (ilość)": len(kafkaDelay0FullResults),
             "Liczba wykonanych testów": coutKafkaDelay0Full,
             "Start": "Znacznik czasowy od Producenta",
             "Koniec": "Znacznik czasowy od Konsumenta",
@@ -464,7 +476,8 @@ if coutKafkaDelay0Half > 0:
         "Konfiguracja testu Kafka (kafkaDelay0Half)": {
             "Technologia": "Kafka Streams",
             "Opóźnienie producenta (wysłanie następnej wiadomości)": "0ms",
-            "Półzbiór danych (ilość)": len(kafkaDelay0HalfResults),
+            "Półzbiór danych (ilość)": countNonEmptyLine,
+            "Przetworzone wartości (ilość)": len(kafkaDelay0HalfResults),
             "Liczba przeprowadzonych testów": coutKafkaDelay0Half,
             "Start": "Znacznik czasowy od Producenta",
             "Koniec": "Znacznik czasowy od Konsumenta",
@@ -618,7 +631,8 @@ if coutSparkDelay3Full > 0:
         "Konfiguracja testu Spark (sparkDelay3Full)": {
             "Technologia": "Spark Structured Streaming",
             "Opóźnienie producenta (wysłanie następnej wiadomości)": "3ms",
-            "Pełny zbiór danych (ilość)": len(sparkDelay3FullResults),
+            "Pełny zbiór danych (ilość)": countNonEmptyLine,
+            "Przetworzone wartości (ilość)": len(sparkDelay3FullResults),
             "Liczba przeprowadzonych testów": coutSparkDelay3Full,
             "Start": "Znacznik czasowy od Producenta",
             "Koniec": "Znacznik czasowy od Konsumenta",
@@ -773,7 +787,8 @@ if coutSparkDelay0Full > 0:
         "Konfiguracja testu Spark (sparkDelay0Full)": {
             "Technologia": "Spark Structured Streaming",
             "Opóźnienie producenta (wysłanie następnej wiadomości)": "0ms",
-            "Pełny zbiór danych (ilość)": len(sparkDelay0FullResults),
+            "Pełny zbiór danych (ilość)": countNonEmptyLine,
+            "Przetworzone wartości (ilość)": len(sparkDelay0FullResults),
             "Liczba przeprowadzonych testów": coutSparkDelay0Full,
             "Start": "Znacznik czasowy od Producenta",
             "Koniec": "Znacznik czasowy od Konsumenta",
@@ -929,7 +944,8 @@ if coutSparkDelay0Half > 0:
     "Konfiguracja testu Spark (sparkDelay0Half)": {
         "Technologia": "Kafka Streams",
         "Opóźnienie producenta (wysłanie następnej wiadomości)": "0ms",
-        "Półzbiór danych (ilość)": len(sparkDelay0HalfResults),
+        "Półzbiór danych (ilość)": countNonEmptyLine,
+        "Przetworzone wartości (ilość)": len(sparkDelay0HalfResults),
         "Liczba przeprowadzonych testów": coutSparkDelay0Half,
         "Start": "Znacznik czasowy od Producenta",
         "Koniec": "Znacznik czasowy od Konsumenta",
