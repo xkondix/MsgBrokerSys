@@ -12,7 +12,7 @@ public class KafkaStreamsProcess {
 
     @Bean
     public Function<KStream<String, DataModel>, KStream<String, DataModel>> process() {
-        return kStream -> kStream;
+        return kStream -> kStream.filter((key, value) -> value.getValue() > 0);
     }
 
 

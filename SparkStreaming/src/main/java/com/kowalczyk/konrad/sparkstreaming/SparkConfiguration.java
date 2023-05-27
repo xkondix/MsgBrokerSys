@@ -9,6 +9,8 @@ import org.apache.spark.sql.types.StructType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.from_json;
 import static org.apache.spark.sql.types.DataTypes.*;
 
 
@@ -63,9 +65,14 @@ public class SparkConfiguration {
                 .option("startingOffsets", "earliest")
                 .option("failOnDataLoss", "true")
                 .load()
-                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)");
+                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+                .select(from_json(col("value"), getSchema()).as("data"), col("key").as("key"))
+                .selectExpr("key", "data.*");
 
-        df.writeStream()
+        Dataset<Row> filteredDf = df.filter(col("value").gt(0));
+
+        filteredDf.selectExpr("CAST(key AS STRING)", "to_json(struct(*)) AS value")
+                .writeStream()
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("topic", "Summary")
