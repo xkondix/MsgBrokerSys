@@ -4,11 +4,9 @@ import com.kowalczyk.konrad.utils.DataModel;
 import com.kowalczyk.konrad.utils.IoTSimulation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
