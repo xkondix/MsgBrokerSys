@@ -98,7 +98,8 @@ public class SparkConfiguration {
                     );
 
                     return updatedRow;
-                }, RowEncoder.apply(df.schema()));
+                }, RowEncoder.apply(df.schema()))
+                .filter(col("value").gt(col("averagingValue")));
 
 
         process.selectExpr("CAST(key AS STRING)", "to_json(struct(*)) AS value")
