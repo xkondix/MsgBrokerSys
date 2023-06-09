@@ -42,7 +42,8 @@ public class KafkaStreamsProcess {
                             }
                         };
                     }
-                });
+                })
+                .filter((key, value) -> value.getValue() > value.getAveragingValue());
     }
 
 
