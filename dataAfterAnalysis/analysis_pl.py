@@ -163,7 +163,7 @@ if(coutKafkaDelay3Full > 0 ):
 
     #kafkaDelay3FullValue Line Chart
     plt.plot(kafkaDelay3FullValueResults)
-    plt.title('Wykres jakości powietrza')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullValueLine.png')
@@ -171,7 +171,7 @@ if(coutKafkaDelay3Full > 0 ):
 
     #kafkaDelay3FullValueAverage Line Chart
     plt.plot(kafkaDelay3FullValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej (Średnia)')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullValueAverageLine.png')
@@ -334,7 +334,7 @@ if coutKafkaDelay0Full > 0:
 
     #kafkaDelay0FullValue Line Chart
     plt.plot(kafkaDelay0FullValueResults)
-    plt.title('Wykres jakości powietrza')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValueLine.png')
@@ -342,7 +342,7 @@ if coutKafkaDelay0Full > 0:
 
     #kafkaDelay0FullValueAverage Line Chart
     plt.plot(kafkaDelay0FullValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej (Średnia)')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValueAverageLine.png')
@@ -505,14 +505,14 @@ if coutKafkaDelay0Half > 0:
 
     #kafkaDelay0HalfValue Line Chart
     plt.plot(kafkaDelay0HalfValueResults)
-    plt.title('Wykres jakości powietrza')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValueLine.png')
     plt.clf()
 
     plt.plot(kafkaDelay0HalfValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej (Średnia)')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValueAverageLine.png')
@@ -675,7 +675,7 @@ if coutSparkDelay3Full > 0:
 
     #sparkDelay3FullValue Line Chart
     plt.plot(sparkDelay3FullValueResults)
-    plt.title('Wykres jakości powietrza')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullValueLine.png')
@@ -683,7 +683,7 @@ if coutSparkDelay3Full > 0:
 
     #sparkDelay3FullValueAverage Line Chart
     plt.plot(sparkDelay3FullValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej (Średnia)')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullValueAverageLine.png')
@@ -845,7 +845,7 @@ if coutSparkDelay0Full > 0:
 
     #sparkDelay0FullValue Line Chart
     plt.plot(sparkDelay0FullValueResults)
-    plt.title('Wykres jakości powietrza')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullValueLine.png')
@@ -853,7 +853,7 @@ if coutSparkDelay0Full > 0:
 
     #sparkDelay0FullValueAverage Line Chart
     plt.plot(sparkDelay0FullValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej (Średnia)')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullValueAverageLine.png')
@@ -1015,7 +1015,7 @@ if coutSparkDelay0Half > 0:
 
     #sparkDelay0HalfValue Line Chart
     plt.plot(sparkDelay0HalfValueResults)
-    plt.title('Wykres jakości powietrza')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueLine.png')
@@ -1023,7 +1023,7 @@ if coutSparkDelay0Half > 0:
 
     #sparkDelay0HalfValueAverage Line Chart
     plt.plot(sparkDelay0HalfValueAverageResults)
-    plt.title('Air Quality Chart Average')
+    plt.title('Wykres jakości powietrza dla danych powyżej średniej (Średnia)')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Number of occurrences')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueAverageLine.png')
