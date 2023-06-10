@@ -12,6 +12,7 @@ parentPath = os.path.dirname(currentPath)
 grandparentPath = os.path.dirname(parentPath)
 pathToResults = grandparentPath + "\\results\\"
 pathToSaveCharts = parentPath + "\\charts_en\\"
+pathToSourceFile = grandparentPath +"\\DsDusznikMOB_PM25.csv"
 
 # Create PDF report
 canvas = canvas.Canvas(parentPath + "\\report_en.pdf", pagesize=letter)
@@ -27,6 +28,10 @@ kafkaDelay3FullValue = []
 kafkaDelay0FullValue = []
 kafkaDelay0HalfValue = []
 
+kafkaDelay3FullValueAverage  = []
+kafkaDelay0FullValueAverage  = []
+kafkaDelay0HalfValueAverage  = []
+
 #spark
 sparkDelay3Full = []
 sparkDelay0Full = []
@@ -35,6 +40,10 @@ sparkDelay0Half = []
 sparkDelay3FullValue  = []
 sparkDelay0FullValue  = []
 sparkDelay0HalfValue  = []
+
+sparkDelay3FullValueAverage  = []
+sparkDelay0FullValueAverage  = []
+sparkDelay0HalfValueAverage  = []
 
 coutKafkaDelay3Full = sum([1 for f in os.listdir(pathToResults) if "test_kafka_d3_full" in f])
 coutKafkaDelay0Full = sum([1 for f in os.listdir(pathToResults) if "test_kafka_d0_full" in f])
@@ -45,6 +54,15 @@ coutSparkDelay0Full = sum([1 for f in os.listdir(pathToResults) if "test_spark_d
 coutSparkDelay0Half = sum([1 for f in os.listdir(pathToResults) if "test_spark_d0_half" in f])
 
 
+countNonEmptyLine = 0
+
+with open(pathToSourceFile, 'r') as file:
+    csv_reader = csv.reader(file)
+
+    for row in csv_reader:
+        if any(row):
+            countNonEmptyLine += 1
+
 #kafkaDelay3Full ------------------------------------------------------------------------------
 
 if(coutKafkaDelay3Full > 0 ):
@@ -54,25 +72,30 @@ if(coutKafkaDelay3Full > 0 ):
             reader = csv.reader(csvfile)
             endSubtractStartKafka = []
             value = []
+            valueAverage = []
 
             for row in reader:
                 timestampEndKafka = float(row[8])
                 timestampStartKafka = float(row[7])
                 value.append(float(row[1]))
+                valueAverage.append(float(row[9]))
                 endSubtractStartKafka.append((timestampEndKafka - timestampStartKafka) / 1000)
                 
             kafkaDelay3Full.append(endSubtractStartKafka)
             kafkaDelay3FullValue.append(value)
+            kafkaDelay3FullValueAverage.append(valueAverage)
   
   
     #kafkaDelay3Full sum
     kafkaDelay3FullSum = [sum(x) for x in zip(*kafkaDelay3Full)]
     kafkaDelay3FullValueSum = [sum(x) for x in zip(*kafkaDelay3FullValue)]
+    kafkaDelay3FullValueAverageSum = [sum(x) for x in zip(*kafkaDelay3FullValueAverage)]
 
 
     #kafkaDelay3Full mean results
     kafkaDelay3FullResults = [x/coutKafkaDelay3Full for x in kafkaDelay3FullSum]
     kafkaDelay3FullValueResults = [x/coutKafkaDelay3Full for x in kafkaDelay3FullValueSum]
+    kafkaDelay3FullValueAverageResults = [x/coutKafkaDelay3Full for x in kafkaDelay3FullValueAverageSum]
 
 
     #kafkaDelay3Full median values
@@ -136,17 +159,26 @@ if(coutKafkaDelay3Full > 0 ):
 
     #kafkaDelay3FullValue Line Chart
     plt.plot(kafkaDelay3FullValueResults)
-    plt.title('Air Quality Chart')
+    plt.title('Air quality chart for data above average')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Number of occurrences')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullValueLine.png')
+    plt.clf()
+
+    #kafkaDelay3FullValueAverage Line Chart
+    plt.plot(kafkaDelay3FullValueAverageResults)
+    plt.title('Air quality chart for data above average (Average)')
+    plt.ylabel('PM2.5 (ug/m3)')
+    plt.xlabel('Number of occurrences')
+    plt.savefig(pathToSaveCharts + 'kafkaDelay3FullValueAverageLine.png')
     plt.clf()
 
     kafkaDelay3FullValues = {
         "Kafka test setup (kafkaDelay3Full)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "3ms",
-            "Full data set (qty)": len(kafkaDelay3FullResults),
+            "Full data set (qty)": countNonEmptyLine,
+            "Processed values (qty)": len(kafkaDelay3FullResults),
             "Number of tests performed": coutKafkaDelay3Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -177,7 +209,8 @@ if(coutKafkaDelay3Full > 0 ):
         "kafkaDelay3FullBoxChart.png",
         "kafkaDelay3FullFiltredHistogram.png",
         "kafkaDelay3FullFiltredLine.png",
-        "kafkaDelay3FullValueLine.png"
+        "kafkaDelay3FullValueLine.png",
+        "kafkaDelay3FullValueAverageLine.png"
     ]
 
     # Set the initial y position of the text
@@ -200,6 +233,7 @@ if(coutKafkaDelay3Full > 0 ):
         if inchValue < 0 :
             inchValue = 7
             canvas.showPage()
+    canvas.showPage()
     
 
     
@@ -211,25 +245,30 @@ if coutKafkaDelay0Full > 0:
             reader = csv.reader(csvfile)
             endSubtractStartKafka = []
             value = []
+            valueAverage = []
 
             for row in reader:
                 timestampEndKafka = float(row[8])
                 timestampStartKafka = float(row[7])
                 value.append(float(row[1]))
+                valueAverage.append(float(row[9]))
                 endSubtractStartKafka.append((timestampEndKafka - timestampStartKafka) / 1000)
 
             kafkaDelay0Full.append(endSubtractStartKafka)
             kafkaDelay0FullValue.append(value)
-
+            kafkaDelay0FullValueAverage.append(valueAverage)
 
     # kafkaDelay0Full sum
     kafkaDelay0FullSum = [sum(x) for x in zip(*kafkaDelay0Full)]
     kafkaDelay0FullValueSum = [sum(x) for x in zip(*kafkaDelay0FullValue)]
+    kafkaDelay0FullValueAverageSum = [sum(x) for x in zip(*kafkaDelay0FullValueAverage)]
 
 
     # kafkaDelay0Full mean results
     kafkaDelay0FullResults = [x / coutKafkaDelay0Full for x in kafkaDelay0FullSum]
     kafkaDelay0FullValueResults = [x / coutKafkaDelay0Full for x in kafkaDelay0FullValueSum]
+    kafkaDelay0FullValueAverageResults = [x / coutKafkaDelay0Full for x in kafkaDelay0FullValueAverageSum]
+
 
     # kafkaDelay0Full median values
     kafkaDelay0FullMedian = np.median(kafkaDelay0FullResults)
@@ -292,17 +331,26 @@ if coutKafkaDelay0Full > 0:
 
     #kafkaDelay0FullValue Line Chart 
     plt.plot(kafkaDelay0FullValueResults)
-    plt.title('Air Quality Chart')
+    plt.title('Air quality chart for data above average')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Number of occurrences')
-    plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValuefLine.png')
+    plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValueLine.png')
+    plt.clf()
+
+    #kafkaDelay0FullValueAverage Line Chart 
+    plt.plot(kafkaDelay0FullValueAverageResults)
+    plt.title('Air quality chart for data above average (Average)')
+    plt.ylabel('PM2.5 (ug/m3)')
+    plt.xlabel('Number of occurrences')
+    plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValueAverageLine.png')
     plt.clf()
 
     kafkaDelay0FullValues = {
         "Kafka test setup (kafkaDelay0Full)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(kafkaDelay0FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(kafkaDelay0FullResults),
             "Number of tests performed": coutKafkaDelay0Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -332,7 +380,8 @@ if coutKafkaDelay0Full > 0:
             "kafkaDelay0FullBoxChart.png",    
             "kafkaDelay0FullFiltredHistogram.png",    
             "kafkaDelay0FullFiltredLine.png",
-            "kafkaDelay0FullValuefLine.png"
+            "kafkaDelay0FullValueLine.png",
+            "kafkaDelay0FullValueAverageLine.png"
             ]
 
     # Set the initial y position of the text
@@ -355,6 +404,7 @@ if coutKafkaDelay0Full > 0:
         if inchValue < 0:
             inchValue = 7
             canvas.showPage()
+    canvas.showPage()
     
 
     
@@ -367,24 +417,31 @@ if coutKafkaDelay0Half > 0:
             reader = csv.reader(csvfile)
             endSubtractStartKafka = []
             value = []
+            valueAverage = []
 
             for row in reader:
                 timestampEndKafka = float(row[8])
                 timestampStartKafka = float(row[7])
                 value.append(float(row[1]))
+                valueAverage.append(float(row[9]))
                 endSubtractStartKafka.append((timestampEndKafka - timestampStartKafka) / 1000)
 
             kafkaDelay0Half.append(endSubtractStartKafka)
             kafkaDelay0HalfValue.append(value)
+            kafkaDelay0HalfValueAverage.append(valueAverage)
             
 
     # kafkaDelay0Half sum
     kafkaDelay0HalfSum = [sum(x) for x in zip(*kafkaDelay0Half)]
     kafkaDelay0HalfValueSum = [sum(x) for x in zip(*kafkaDelay0HalfValue)]
+    kafkaDelay0HalfValueAverageSum = [sum(x) for x in zip(*kafkaDelay0HalfValueAverage)]
+
 
     # kafkaDelay0Half mean results
     kafkaDelay0HalfResults = [x / coutKafkaDelay0Half for x in kafkaDelay0HalfSum]
     kafkaDelay0HalfValueResults = [x / coutKafkaDelay0Half for x in kafkaDelay0HalfValueSum]
+    kafkaDelay0HalfValueAverageResults = [x / coutKafkaDelay0Half for x in kafkaDelay0HalfValueAverageSum]
+
 
     # kafkaDelay0Half median values
     kafkaDelay0HalfMedian = np.median(kafkaDelay0HalfResults)
@@ -447,18 +504,26 @@ if coutKafkaDelay0Half > 0:
 
     #kafkaDelay0HalfValue Line Chart 
     plt.plot(kafkaDelay0HalfValueResults)
-    plt.title('Air Quality Chart')
+    plt.title('Air quality chart for data above average')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Number of occurrences')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValuefLine.png')
     plt.clf()
 
+    #kafkaDelay0HalfValueAverage Line Chart 
+    plt.plot(kafkaDelay0HalfValueAverageResults)
+    plt.title('Air quality chart for data above average (Average)')
+    plt.ylabel('PM2.5 (ug/m3)')
+    plt.xlabel('Number of occurrences')
+    plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValueAverageLine.png')
+    plt.clf()
 
     kafkaDelay0HalfValues = {
         "Kafka test setup (kafkaDelay0Half)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(kafkaDelay0HalfResults),
+            "Full data set (qty)": countNonEmptyLine,
+            "Processed values (qty)": len(kafkaDelay0HalfResults),
             "Number of tests performed": coutKafkaDelay0Half,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -488,7 +553,8 @@ if coutKafkaDelay0Half > 0:
         "kafkaDelay0HalfBoxChart.png",
         "kafkaDelay0HalfFiltredHistogram.png",
         "kafkaDelay0HalfFiltredLine.png",
-        "kafkaDelay0HalfValuefLine.png"
+        "kafkaDelay0HalfValueLine.png",
+        "kafkaDelay0HalfValueAverageLine.png"
         ]
     
     # Set the initial y position of the text
@@ -512,7 +578,7 @@ if coutKafkaDelay0Half > 0:
         if inchValue < 0:
             inchValue = 7
             canvas.showPage()
-    
+    canvas.showPage()
 
 
 #sparkDelay3Full ------------------------------------------------------------------------------
@@ -523,22 +589,27 @@ if coutSparkDelay3Full > 0:
             reader = csv.reader(csvfile)
             endSubtractStartSpark = []
             value = []
+            valueAverage = []
 
             for row in reader:
                 timestampEndSpark = float(row[8])
                 timestampStartSpark = float(row[7])
                 value.append(float(row[1]))
+                valueAverage.append(float(row[9]))
                 endSubtractStartSpark.append((timestampEndSpark - timestampStartSpark) / 1000)
             sparkDelay3Full.append(endSubtractStartSpark)
             sparkDelay3FullValue.append(value)
+            sparkDelay3FullValueAverage.append(valueAverage)
 
     # sparkDelay3Full sum
     sparkDelay3FullSum = [sum(x) for x in zip(*sparkDelay3Full)]
     sparkDelay3FullValueSum = [sum(x) for x in zip(*sparkDelay3FullValue)]
+    sparkDelay3FullValueAverageSum = [sum(x) for x in zip(*sparkDelay3FullValueAverage)]
 
     # sparkDelay3Full mean results
     sparkDelay3FullResults = [x / coutSparkDelay3Full for x in sparkDelay3FullSum]
     sparkDelay3FullValueResults = [x / coutSparkDelay3Full for x in sparkDelay3FullValueSum]
+    sparkDelay3FullValueAverageResults = [x / coutSparkDelay3Full for x in sparkDelay3FullValueAverageSum]
 
     # sparkDelay3Full median values
     sparkDelay3FullMedian = np.median(sparkDelay3FullResults)
@@ -601,17 +672,26 @@ if coutSparkDelay3Full > 0:
 
     #sparkDelay3FullValue Line Chart 
     plt.plot(sparkDelay3FullValueResults)
-    plt.title('Air Quality Chart')
+    plt.title('Air quality chart for data above average')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Number of occurrences')
-    plt.savefig(pathToSaveCharts + 'sparkDelay3FullValuefLine.png')
+    plt.savefig(pathToSaveCharts + 'sparkDelay3FullValueLine.png')
+    plt.clf()
+
+    #sparkDelay3FullValueAverage Line Chart 
+    plt.plot(sparkDelay3FullValueAverageResults)
+    plt.title('Air quality chart for data above average (Average)')
+    plt.ylabel('PM2.5 (ug/m3)')
+    plt.xlabel('Number of occurrences')
+    plt.savefig(pathToSaveCharts + 'sparkDelay3FullValueAverageLine.png')
     plt.clf()
 
     sparkDelay3FullValues = {
         "Spark test setup (sparkDelay3Full)": {
             "Technology": "Spark Structured Streaming",
             "Producer Delay (Send next message)": "3ms",
-            "Full data set (qty)": len(sparkDelay3FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(sparkDelay3FullResults),
             "Number of tests performed": coutSparkDelay3Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -641,7 +721,8 @@ if coutSparkDelay3Full > 0:
         "sparkDelay3FullBoxChart.png",    
         "sparkDelay3FullFiltredHistogram.png",    
         "sparkDelay3FullFiltredLine.png",
-        "sparkDelay3FullValuefLine.png"
+        "sparkDelay3FullValueLine.png",
+        "sparkDelay3FullValueAverageLine.png"
         ]
 
     # Set the initial y position of the text
@@ -664,6 +745,7 @@ if coutSparkDelay3Full > 0:
         if inchValue < 0 :
             inchValue = 7
             canvas.showPage()
+    canvas.showPage()
     
 
 
@@ -676,23 +758,29 @@ if coutSparkDelay0Full > 0:
             reader = csv.reader(csvfile)
             endSubtractStartSpark = []
             value = []
+            valueAverage = []
 
             for row in reader:
                 timestampEndSpark = float(row[8])
                 timestampStartSpark = float(row[7])
                 value.append(float(row[1]))
+                valueAverage.append(float(row[9]))
                 endSubtractStartSpark.append((timestampEndSpark - timestampStartSpark) / 1000)
 
             sparkDelay0Full.append(endSubtractStartSpark)
             sparkDelay0FullValue.append(value)
+            sparkDelay0FullValueAverage.append(valueAverage)
+
 
     # sparkDelay0Full sum
     sparkDelay0FullSum = [sum(x) for x in zip(*sparkDelay0Full)]
     sparkDelay0FullValueSum = [sum(x) for x in zip(*sparkDelay0FullValue)]
+    sparkDelay0FullValueAverageSum = [sum(x) for x in zip(*sparkDelay0FullValueAverage)]
 
     # sparkDelay0Full mean results
     sparkDelay0FullResults = [x / coutSparkDelay0Full for x in sparkDelay0FullSum]
     sparkDelay0FullValueResults = [x / coutSparkDelay0Full for x in sparkDelay0FullValueSum]
+    sparkDelay0FullValueAverageResults = [x / coutSparkDelay0Full for x in sparkDelay0FullValueAverageSum]
 
     # sparkDelay0Full median values
     sparkDelay0FullMedian = np.median(sparkDelay0FullResults)
@@ -755,17 +843,26 @@ if coutSparkDelay0Full > 0:
 
     #sparkDelay0FullValue Line Chart 
     plt.plot(sparkDelay0FullValueResults)
-    plt.title('Air Quality Chart')
+    plt.title('Air quality chart for data above average')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Number of occurrences')
-    plt.savefig(pathToSaveCharts + 'sparkDelay0FullValuefLine.png')
+    plt.savefig(pathToSaveCharts + 'sparkDelay0FullValueLine.png')
+    plt.clf()
+
+    #sparkDelay0FullValueAverage Line Chart 
+    plt.plot(sparkDelay0FullValueAverageResults)
+    plt.title('Air quality chart for data above average (Average)')
+    plt.ylabel('PM2.5 (ug/m3)')
+    plt.xlabel('Number of occurrences')
+    plt.savefig(pathToSaveCharts + 'sparkDelay0FullValueAverageLine.png')
     plt.clf()
 
     sparkDelay0FullValues = {
         "Spark test setup (sparkDelay0Full)": {
             "Technology": "Spark Structured Streaming",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(sparkDelay0FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(sparkDelay0FullResults),
             "Number of tests performed": coutSparkDelay0Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -795,7 +892,8 @@ if coutSparkDelay0Full > 0:
         "sparkDelay0FullBoxChart.png",
         "sparkDelay0FullFilteredHistogram.png",
         "sparkDelay0FullFiltredLine.png",
-        "sparkDelay0FullValuefLine.png"
+        "sparkDelay0FullValueLine.png",
+        "sparkDelay0FullValueAverageLine.png"
     ]
 
      # Set the initial y position of the text
@@ -818,6 +916,7 @@ if coutSparkDelay0Full > 0:
         if inchValue < 0 :
             inchValue = 7
             canvas.showPage()
+    canvas.showPage()
     
 
 
@@ -829,24 +928,28 @@ if coutSparkDelay0Half > 0:
             reader = csv.reader(csvfile)
             endSubtractStartSpark = []
             value = []
+            valueAverage = []
 
             for row in reader:
                 timestampEndSpark = float(row[8])
                 timestampStartSpark = float(row[7])
                 value.append(float(row[1]))
+                valueAverage.append(float(row[9]))
                 endSubtractStartSpark.append((timestampEndSpark - timestampStartSpark) / 1000)
 
             sparkDelay0Half.append(endSubtractStartSpark)
             sparkDelay0HalfValue.append(value)
+            sparkDelay0HalfValueAverage.append(valueAverage)
 
     # sparkDelay0Half sum
     sparkDelay0HalfSum = [sum(x) for x in zip(*sparkDelay0Half)]
     sparkDelay0HalfValueSum = [sum(x) for x in zip(*sparkDelay0HalfValue)]
+    sparkDelay0HalfValueAverageSum = [sum(x) for x in zip(*sparkDelay0HalfValueAverage)]
 
     # sparkDelay0Half mean results
     sparkDelay0HalfResults = [x / coutSparkDelay0Half for x in sparkDelay0HalfSum]
     sparkDelay0HalfValueResults = [x / coutSparkDelay0Half for x in sparkDelay0HalfValueSum]
-
+    sparkDelay0HalfValueAverageResults = [x / coutSparkDelay0Half for x in sparkDelay0HalfValueAverageSum]
 
     # sparkDelay0Half median values
     sparkDelay0HalfMedian = np.median(sparkDelay0HalfResults)
@@ -909,18 +1012,26 @@ if coutSparkDelay0Half > 0:
 
     #sparkDelay0HalfValue Line Chart 
     plt.plot(sparkDelay0HalfValueResults)
-    plt.title('Air Quality Chart')
+    plt.title('Air quality chart for data above average')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Number of occurrences')
-    plt.savefig(pathToSaveCharts + 'sparkDelay0HalValuefLine.png')
+    plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueLine.png')
     plt.clf()
 
+    #sparkDelay0HalfValueAverage Line Chart 
+    plt.plot(sparkDelay0HalfValueAverageResults)
+    plt.title('Air quality chart for data above average (Average)')
+    plt.ylabel('PM2.5 (ug/m3)')
+    plt.xlabel('Number of occurrences')
+    plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueAverageLine.png')
+    plt.clf()
 
     sparkDelay0HalfValues = {
     "Spark test setup (sparkDelay0Half)": {
         "Technology": "Spark Structured Streaming",
         "Producer Delay (Send next message)": "0ms",
-        "Full data set (qty)": len(sparkDelay0HalfResults),
+        "Full data set (qty)":  countNonEmptyLine,
+        "Processed values (qty)": len(sparkDelay0HalfResults),
         "Number of tests performed": coutSparkDelay0Half,
         "Start": "Timestamp from Producer",
         "End": "Timestamp from Consumer",
@@ -950,7 +1061,8 @@ if coutSparkDelay0Half > 0:
         "sparkDelay0HalfBoxChart.png",
         "sparkDelay0HalfFiltredHistogram.png",
         "sparkDelay0HalfFiltredLine.png",
-        "sparkDelay0HalValuefLine.png"
+        "sparkDelay0HalValueLine.png",
+        "sparkDelay0HalValueAverageLine.png"
         ]
 
     pos = 750
