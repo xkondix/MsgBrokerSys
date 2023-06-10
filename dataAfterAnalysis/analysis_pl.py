@@ -1025,7 +1025,7 @@ if coutSparkDelay0Half > 0:
     plt.plot(sparkDelay0HalfValueAverageResults)
     plt.title('Wykres jakości powietrza dla danych powyżej średniej (Średnia)')
     plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Number of occurrences')
+    plt.xlabel('Liczba próbek')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueAverageLine.png')
     plt.clf()
 
