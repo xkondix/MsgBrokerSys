@@ -5,10 +5,12 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.streaming.OutputMode;
 import org.apache.spark.sql.types.StructType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static org.apache.spark.sql.functions.*;
 import static org.apache.spark.sql.types.DataTypes.*;
 
 
@@ -49,7 +51,9 @@ public class SparkConfiguration {
                 .add("indicator", StringType)
                 .add("stationCode", StringType)
                 .add("timestampSend", LongType)
-                .add("timestampConsumer", LongType);
+                .add("timestampConsumer", LongType)
+                .add("averageValue", DoubleType);
+
     }
 
     @Bean
@@ -62,9 +66,42 @@ public class SparkConfiguration {
                 .option("startingOffsets", "earliest")
                 .option("failOnDataLoss", "true")
                 .load()
-                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)");
+                .selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+                .select(from_json(col("value"), getSchema()).as("data"), col("key").as("key"))
+                .selectExpr("key", "data.*");
 
-        df.writeStream()
+        Dataset<Row> process = df
+                .filter(col("value").gt(0))
+                .groupBy("positionCode")
+                .agg(
+                        expr("first(value) as value"),
+                        expr("first(date) as date"),
+                        expr("first(unit) as unit"),
+                        expr("first(averagingTime) as averagingTime"),
+                        expr("first(indicator) as indicator"),
+                        expr("first(stationCode) as stationCode"),
+                        expr("first(timestampSend) as timestampSend"),
+                        expr("first(timestampConsumer) as timestampConsumer"),
+//                        avg(col("value")).as("averageValue"))
+                        sum(col("value")).as("sum"),
+                        count(col("value")).as("count"),
+                        expr("sum/count").as("averageValue"))
+                .select(
+                        col("date"),
+                        col("value"),
+                        col("positionCode"),
+                        col("unit"),
+                        col("averagingTime"),
+                        col("indicator"),
+                        col("stationCode"),
+                        col("count").as("timestampSend"),
+                        col("timestampConsumer"),
+                        col("averageValue")
+                );
+
+        process.selectExpr("CAST(positionCode AS STRING)", "to_json(struct(*)) AS value")
+                .writeStream()
+                .outputMode(OutputMode.Update())
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("topic", "Summary")
