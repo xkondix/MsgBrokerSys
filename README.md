@@ -1,6 +1,6 @@
 # test-3
 
-In this branch, I filter out the invalid data and count the average for the correct data in real time.
+On this branch, I filter out the invalid data and count the average for the correct data in real time.
 The full set is 8760, half 4380. After rejecting invalid data, the full set is 8746, half 4313.
 
 In the case of Kafka Streams and Spark Structured Streaming, both solutions count and filter data on the fly.
