@@ -5,12 +5,12 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.streaming.OutputMode;
 import org.apache.spark.sql.types.StructType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.from_json;
+import static org.apache.spark.sql.functions.*;
 import static org.apache.spark.sql.types.DataTypes.*;
 
 
@@ -51,7 +51,9 @@ public class SparkConfiguration {
                 .add("indicator", StringType)
                 .add("stationCode", StringType)
                 .add("timestampSend", LongType)
-                .add("timestampConsumer", LongType);
+                .add("timestampConsumer", LongType)
+                .add("medianValue", DoubleType);
+
     }
 
     @Bean
@@ -68,10 +70,35 @@ public class SparkConfiguration {
                 .select(from_json(col("value"), getSchema()).as("data"), col("key").as("key"))
                 .selectExpr("key", "data.*");
 
-        Dataset<Row> filteredDf = df.filter(col("value").gt(0));
+        Dataset<Row> process = df
+                .filter(col("value").gt(0))
+                .groupBy("positionCode")
+                .agg(
+                        expr("first(value) as value"),
+                        expr("first(date) as date"),
+                        expr("first(unit) as unit"),
+                        expr("first(averagingTime) as averagingTime"),
+                        expr("first(indicator) as indicator"),
+                        expr("first(stationCode) as stationCode"),
+                        expr("first(timestampSend) as timestampSend"),
+                        expr("first(timestampConsumer) as timestampConsumer"),
+                        callUDF("percentile_approx", col("value"), lit(0.5)).as("medianValue")
+                ).select(
+                        col("date"),
+                        col("value"),
+                        col("positionCode"),
+                        col("unit"),
+                        col("averagingTime"),
+                        col("indicator"),
+                        col("stationCode"),
+                        col("timestampSend"),
+                        col("timestampConsumer"),
+                        col("medianValue")
+                );
 
-        filteredDf.selectExpr("CAST(key AS STRING)", "to_json(struct(*)) AS value")
+        process.selectExpr("CAST(positionCode AS STRING)", "to_json(struct(*)) AS value")
                 .writeStream()
+                .outputMode(OutputMode.Complete())
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("topic", "Summary")
