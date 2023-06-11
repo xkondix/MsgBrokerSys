@@ -1,7 +1,5 @@
 # test-5
 
---------------------------------------------------------------------------------------------------------------
-
 On this branch I filter out incorrect data and count the median for the correct dataset.
 The full set is 8760, half 4380. After discarding incorrect data, the full set is 8746, half 4313.
 
