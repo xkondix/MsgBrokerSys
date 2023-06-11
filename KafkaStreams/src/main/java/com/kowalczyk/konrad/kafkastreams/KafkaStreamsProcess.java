@@ -5,6 +5,7 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Grouped;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.Materialized;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,20 +22,17 @@ public class KafkaStreamsProcess {
         return kStream -> kStream.filter((key, value) -> value.getValue() > 0)
                 .map((key, value) -> new KeyValue<>(value.getPositionCode(), new DataCalc(value)))
                 .groupByKey(Grouped.with(Serdes.String(), new DataCalcSerde()))
-                .reduce((value1, value2) -> {
-                    if (value1.getValues() == null || (START_DATE.equals(value2.getDate()))) {
-                        ArrayList<Double> median = new ArrayList<>();
-                        median.add(value1.getValue());
-                        median.add(value2.getValue());
-                        value1.setValues(median);
-                        value1.setValue(1);
-                    } else {
-                        value1.addValue(value2.getValue());
-                        value1.setValue(value1.getValue() + 1);
-                    }
-                    value1.calculateMedian();
-                    return value1;
-                })
+                .aggregate(DataCalc::new,
+                        (key, value, aggregate) -> {
+                            if (START_DATE.equals(value.getDate())) {
+                                aggregate = value;
+                            }
+                            aggregate.setSum(aggregate.getSum() + value.getValue());
+                            aggregate.setCount(aggregate.getCount() + 1);
+                            aggregate.setAverageValue(aggregate.getSum() / aggregate.getCount());
+                            return aggregate;
+                        }
+                        , Materialized.with(Serdes.String(), new DataCalcSerde()))
                 .toStream()
                 .map((key, value) -> new KeyValue<>(String.valueOf(value.getPositionCode())
                         , new DataModel(value.getDate()
@@ -46,7 +44,7 @@ public class KafkaStreamsProcess {
                         , value.getStationCode()
                         , value.getTimestampSend()
                         , 0
-                        , value.getMedianValue())));
+                        , value.getAverageValue())));
 
     }
 
