@@ -52,7 +52,7 @@ public class SparkConfiguration {
                 .add("stationCode", StringType)
                 .add("timestampSend", LongType)
                 .add("timestampConsumer", LongType)
-                .add("medianValue", DoubleType);
+                .add("averageValue", DoubleType);
 
     }
 
@@ -82,8 +82,11 @@ public class SparkConfiguration {
                         expr("first(stationCode) as stationCode"),
                         expr("first(timestampSend) as timestampSend"),
                         expr("first(timestampConsumer) as timestampConsumer"),
-                        callUDF("percentile_approx", col("value"), lit(0.5)).as("medianValue")
-                ).select(
+//                        avg(col("value")).as("averageValue"))
+                        sum(col("value")).as("sum"),
+                        count(col("value")).as("count"),
+                        expr("sum/count").as("averageValue"))
+                .select(
                         col("date"),
                         col("value"),
                         col("positionCode"),
@@ -91,14 +94,14 @@ public class SparkConfiguration {
                         col("averagingTime"),
                         col("indicator"),
                         col("stationCode"),
-                        col("timestampSend"),
+                        col("count").as("timestampSend"),
                         col("timestampConsumer"),
-                        col("medianValue")
+                        col("averageValue")
                 );
 
         process.selectExpr("CAST(positionCode AS STRING)", "to_json(struct(*)) AS value")
                 .writeStream()
-                .outputMode(OutputMode.Complete())
+                .outputMode(OutputMode.Update())
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("topic", "Summary")
