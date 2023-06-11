@@ -35,7 +35,7 @@ public class DataModel {
     private long timestampConsumer;
     @Setter
     @Getter
-    private double medianValue;
+    private double averageValue;
 
 
     public DataModel(String date, double value, String positionCode, String unit, String averagingTime, String indicator, String stationCode) {
@@ -49,7 +49,7 @@ public class DataModel {
     }
 
     public DataModel(String date, double value, String positionCode, String unit, String averagingTime, String indicator
-            , String stationCode, long timestampSend, long timestampConsumer, double medianValue) {
+            , String stationCode, long timestampSend, long timestampConsumer, double averageValue) {
         this.date = date;
         this.value = value;
         this.positionCode = positionCode;
@@ -59,7 +59,7 @@ public class DataModel {
         this.stationCode = stationCode;
         this.timestampSend = timestampSend;
         this.timestampConsumer = timestampConsumer;
-        this.medianValue = medianValue;
+        this.averageValue = averageValue;
     }
 
     public DataModel() {
@@ -75,7 +75,7 @@ public class DataModel {
                 , stationCode
                 , String.valueOf(timestampSend)
                 , String.valueOf(timestampConsumer)
-                , String.valueOf(medianValue)};
+                , String.valueOf(averageValue)};
     }
 
 

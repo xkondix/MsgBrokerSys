@@ -42,13 +42,17 @@ public class DataCalc {
     private long timestampConsumer;
     @Setter
     @Getter
-    private double medianValue;
+    private double averageValue;
     @Setter
     @Getter
-    private List<Double> values;
+    private double sum;
+    @Setter
+    @Getter
+    private double count;
+
 
     public DataCalc(String date, double value, String positionCode, String unit, String averagingTime, String indicator
-            , String stationCode, long timestampSend, long timestampConsumer, double medianValue, List<Double> values) {
+            , String stationCode, long timestampSend, long timestampConsumer, double averageValue) {
         this.date = date;
         this.value = value;
         this.positionCode = positionCode;
@@ -58,8 +62,7 @@ public class DataCalc {
         this.stationCode = stationCode;
         this.timestampSend = timestampSend;
         this.timestampConsumer = timestampConsumer;
-        this.medianValue = medianValue;
-        this.values = values;
+        this.averageValue = averageValue;
     }
 
     public DataCalc() {
@@ -72,8 +75,9 @@ public class DataCalc {
         this.stationCode = StringUtils.EMPTY;
         this.timestampSend = 0;
         this.timestampConsumer = 0;
-        this.medianValue = 0.0;
-        this.values = new ArrayList<>();
+        this.averageValue = 0.0;
+        this.sum = 0;
+        this.count = 0;
     }
 
     public DataCalc(DataModel dataModel) {
@@ -86,25 +90,11 @@ public class DataCalc {
         this.stationCode = dataModel.getStationCode();
         this.timestampSend = dataModel.getTimestampSend();
         this.timestampConsumer = 0;
-        this.medianValue = 0.0;
-        this.values = null;
+        this.averageValue = 0.0;
+        this.sum = 0;
+        this.count = 0;
     }
 
-    public void addValue(Double value) {
-        values.add(value);
-    }
 
-    public void calculateMedian() {
-        Collections.sort(values);
-
-        int size = values.size();
-        if (size % 2 == 0) {
-            int mid = size / 2;
-            this.medianValue = (values.get(mid - 1) + values.get(mid)) / 2.0;
-        } else {
-            int mid = size / 2;
-            this.medianValue = values.get(mid);
-        }
-    }
 
 }
