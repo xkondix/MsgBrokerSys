@@ -5,7 +5,7 @@
 On this branch I filter out incorrect data and count the median for the correct dataset.
 The full set is 8760, half 4380. After discarding incorrect data, the full set is 8746, half 4313.
 
-For Kafka Streams I count the exact median.
+For Kafka Streams I count the exact median. In the solution I take into account the last record returned by processing.
 
 For Spark Structured Streaming I count the approximate median.
 I decided to use a built-in method that allows approximate calculations, more here: https://spark.apache.org/docs/3.4.0/api/sql/index.html#percentile_approx
