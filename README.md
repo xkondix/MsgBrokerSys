@@ -1,7 +1,5 @@
 # test-2
 
---------------------------------------------------------------------------------------------------------------
-
 In this branch, I filter out the invalid data.
 The full set is 8760, half 4380. After rejecting invalid data, the full set is 8746, half 4313.
 
