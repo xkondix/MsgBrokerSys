@@ -556,7 +556,7 @@ if coutKafkaDelay0Half > 0:
         "Konfiguracja testu Kafka (kafkaDelay0Half)": {
             "Technologia": "Kafka Streams",
             "Opóźnienie producenta (wysłanie następnej wiadomości)": "0ms",
-            "Półzbiór danych (ilość)": countNonEmptyLine,
+            "Półzbiór danych (ilość)": int(countNonEmptyLine/2),
             "Przetworzone wartości (ilość)": len(kafkaDelay0HalfResults),
             "Liczba przeprowadzonych testów": coutKafkaDelay0Half,
             "Start": "Znacznik czasowy od Producenta",
@@ -1116,7 +1116,7 @@ if coutSparkDelay0Half > 0:
     "Konfiguracja testu Spark (sparkDelay0Half)": {
         "Technologia": "Kafka Streams",
         "Opóźnienie producenta (wysłanie następnej wiadomości)": "0ms",
-        "Półzbiór danych (ilość)": countNonEmptyLine,
+        "Półzbiór danych (ilość)": int(countNonEmptyLine/2),
         "Przetworzone wartości (ilość)": len(sparkDelay0HalfResults),
         "Liczba przeprowadzonych testów": coutSparkDelay0Half,
         "Start": "Znacznik czasowy od Producenta",
