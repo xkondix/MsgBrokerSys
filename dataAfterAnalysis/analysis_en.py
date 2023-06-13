@@ -84,7 +84,7 @@ if(coutKafkaDelay3Full > 0 ):
             kafkaDelay3Full.append(endSubtractStartKafka)
             kafkaDelay3FullValue.append(value)
             kafkaDelay3FullValueAverage.append(valueAverage)
-  
+
   
     #kafkaDelay3Full sum
     kafkaDelay3FullSum = [sum(x) for x in zip(*kafkaDelay3Full)]
@@ -251,7 +251,7 @@ if(coutKafkaDelay3Full > 0 ):
             inchValue = 7
             canvas.showPage()
     canvas.showPage()
-    
+
 
     
 #kafkaDelay0Full ------------------------------------------------------------------------------
@@ -354,7 +354,7 @@ if coutKafkaDelay0Full > 0:
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValueLine.png')
     plt.clf()
 
-    #kafkaDelay0FullValueAverage Line Chart 
+    #kafkaDelay0FullValueAverage Line Chart
     plt.plot(kafkaDelay0FullValueAverageResults)
     plt.title('Air Quality Chart Average')
     plt.ylabel('PM2.5 (ug/m3)')
@@ -439,7 +439,7 @@ if coutKafkaDelay0Full > 0:
             inchValue = 7
             canvas.showPage()
     canvas.showPage()
-    
+
 
     
     
@@ -463,7 +463,7 @@ if coutKafkaDelay0Half > 0:
             kafkaDelay0Half.append(endSubtractStartKafka)
             kafkaDelay0HalfValue.append(value)
             kafkaDelay0HalfValueAverage.append(valueAverage)
-            
+
 
     # kafkaDelay0Half sum
     kafkaDelay0HalfSum = [sum(x) for x in zip(*kafkaDelay0Half)]
@@ -544,7 +544,7 @@ if coutKafkaDelay0Half > 0:
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValuefLine.png')
     plt.clf()
 
-    #kafkaDelay0HalfValueAverage Line Chart 
+    #kafkaDelay0HalfValueAverage Line Chart
     plt.plot(kafkaDelay0HalfValueAverageResults)
     plt.title('Air Quality Chart Average')
     plt.ylabel('PM2.5 (ug/m3)')
@@ -556,7 +556,7 @@ if coutKafkaDelay0Half > 0:
         "Kafka test setup (kafkaDelay0Half)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": countNonEmptyLine,
+            "Full data set (qty)": int(countNonEmptyLine/2),
             "Processed values (qty)": len(kafkaDelay0HalfResults),
             "Number of tests performed": coutKafkaDelay0Half,
             "Start": "Timestamp from Producer",
@@ -728,7 +728,7 @@ if coutSparkDelay3Full > 0:
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullValueLine.png')
     plt.clf()
 
-    #sparkDelay3FullValueAverage Line Chart 
+    #sparkDelay3FullValueAverage Line Chart
     plt.plot(sparkDelay3FullValueAverageResults)
     plt.title('Air Quality Chart Average')
     plt.ylabel('PM2.5 (ug/m3)')
@@ -813,7 +813,7 @@ if coutSparkDelay3Full > 0:
             inchValue = 7
             canvas.showPage()
     canvas.showPage()
-    
+
 
 
 
@@ -916,7 +916,7 @@ if coutSparkDelay0Full > 0:
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullValueLine.png')
     plt.clf()
 
-    #sparkDelay0FullValueAverage Line Chart 
+    #sparkDelay0FullValueAverage Line Chart
     plt.plot(sparkDelay0FullValueAverageResults)
     plt.title('Air Quality Chart Average')
     plt.ylabel('PM2.5 (ug/m3)')
@@ -1001,7 +1001,7 @@ if coutSparkDelay0Full > 0:
             inchValue = 7
             canvas.showPage()
     canvas.showPage()
-    
+
 
 
 #sparkDelay0Half ------------------------------------------------------------------------------
@@ -1094,7 +1094,7 @@ if coutSparkDelay0Half > 0:
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalfFiltredLine.png')
     plt.clf()
 
-    #sparkDelay0HalfValue Line Chart 
+    #sparkDelay0HalfValue Line Chart
     plt.plot(sparkDelay0HalfValueResults)
     plt.title('Air Quality Chart')
     plt.ylabel('PM2.5 (ug/m3)')
@@ -1102,7 +1102,7 @@ if coutSparkDelay0Half > 0:
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueLine.png')
     plt.clf()
 
-    #sparkDelay0HalfValueAverage Line Chart 
+    #sparkDelay0HalfValueAverage Line Chart
     plt.plot(sparkDelay0HalfValueAverageResults)
     plt.title('Air Quality Chart Average')
     plt.ylabel('PM2.5 (ug/m3)')
@@ -1114,7 +1114,7 @@ if coutSparkDelay0Half > 0:
     "Spark test setup (sparkDelay0Half)": {
         "Technology": "Spark Structured Streaming",
         "Producer Delay (Send next message)": "0ms",
-        "Full data set (qty)":  countNonEmptyLine,
+        "Full data set (qty)":  int(countNonEmptyLine/2),
         "Processed values (qty)": len(sparkDelay0HalfResults),
         "Number of tests performed": coutSparkDelay0Half,
         "Start": "Timestamp from Producer",
