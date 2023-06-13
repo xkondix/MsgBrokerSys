@@ -182,6 +182,10 @@ if(coutKafkaDelay3Full > 0 ):
         }
     }
 
+    kafkaDelay3FullMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in kafkaDelay3Full]
+    }
+
     kafkaDelay3FullChartNames = [
         "kafkaDelay3FullHistogram.png",
         "kafkaDelay3FullLine.png",
@@ -201,6 +205,19 @@ if(coutKafkaDelay3Full > 0 ):
         for key, value in data.items():
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
+        pos -= 10
+
+    for section, values in kafkaDelay3FullMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):  
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])  
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
         pos -= 10
 
     inchValue = 7
@@ -338,6 +355,10 @@ if coutKafkaDelay0Full > 0:
         }
     }
 
+    kafkaDelay0FullMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in kafkaDelay0Full]
+    }
+
     kafkaDelay0FullChartNames = [
             "kafkaDelay0FullHistogram.png",
             "kafkaDelay0FullLine.png",    
@@ -358,7 +379,20 @@ if coutKafkaDelay0Full > 0:
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
         pos -= 10
-        
+
+    for section, values in kafkaDelay0FullMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):  
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])  
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
+        pos -= 10
+
     inchValue = 7
     canvas.showPage()
     for name in kafkaDelay0FullChartNames:
@@ -495,6 +529,10 @@ if coutKafkaDelay0Half > 0:
         }
     }
 
+    kafkaDelay0HalfMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in kafkaDelay0Half]
+    }
+
     kafkaDelay0HalfChartNames = [
         "kafkaDelay0HalfHistogram.png",
         "kafkaDelay0HalfLine.png",
@@ -516,6 +554,18 @@ if coutKafkaDelay0Half > 0:
             pos -= 20
         pos -= 10
 
+    for section, values in kafkaDelay0HalfMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):  
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])  
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
+        pos -= 10
 
     inchValue = 7
     canvas.showPage()
@@ -649,6 +699,10 @@ if coutSparkDelay3Full > 0:
         }
     }
 
+    sparkDelay3FullMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in sparkDelay3Full]
+    }
+
     sparkDelay3FullChartNames = [    
         "sparkDelay3FullHistogram.png",    
         "sparkDelay3FullLine.png",    
@@ -669,6 +723,19 @@ if coutSparkDelay3Full > 0:
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
         pos -= 10
+
+    for section, values in sparkDelay3FullMean10.items():
+            canvas.setFont("Helvetica-Bold", 14)
+            canvas.drawString(100, pos, section)
+            pos -= 30
+            canvas.setFont("Helvetica", 12)
+
+            for i in range(0, len(values), 3):
+                row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+                canvas.drawString(120, pos, row)
+                pos -= 20
+
+            pos -= 10
 
     inchValue = 7
     canvas.showPage()
@@ -804,6 +871,10 @@ if coutSparkDelay0Full > 0:
         }
     }
 
+    sparkDelay0FullMean10 = {
+            "Average time for each sample ": [np.mean(x) for x in sparkDelay0Full]
+        }
+
     sparkDelay0FullChartNames = [
         "sparkDelay0FullHistogram.png",
         "sparkDelay0FullLine.png",
@@ -823,6 +894,19 @@ if coutSparkDelay0Full > 0:
         for key, value in data.items():
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
+        pos -= 10
+
+    for section, values in sparkDelay0FullMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
         pos -= 10
 
     inchValue = 7
@@ -960,6 +1044,10 @@ if coutSparkDelay0Half > 0:
     }
 }
 
+    sparkDelay0HalfMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in sparkDelay0Half]
+    }
+
     sparkDelay0HalfChartNames = [
         "sparkDelay0HalfHistogram.png",
         "sparkDelay0HalfLine.png",
@@ -978,6 +1066,19 @@ if coutSparkDelay0Half > 0:
         for key, value in data.items():
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
+        pos -= 10
+
+    for section, values in sparkDelay0HalfMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
         pos -= 10
 
     inchValue = 7
