@@ -480,7 +480,7 @@ if coutKafkaDelay0Half > 0:
     plt.clf()
 
     # kafkaDelay0Half Box Chart
-    plt.boxplot([kafkaDelay0FullResults], labels=['Kafka delay 0ms half'])
+    plt.boxplot([kafkaDelay0HalfResults], labels=['Kafka delay 0ms half'])
     plt.title('Kafka Box Chart delay 0ms full')
     plt.ylabel('Time (s)')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfBoxChart.png')
