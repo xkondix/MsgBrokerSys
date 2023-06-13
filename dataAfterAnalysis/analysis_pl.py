@@ -441,7 +441,7 @@ if coutKafkaDelay0Half > 0:
     plt.clf()
 
     # kafkaDelay0Half Box Chart
-    plt.boxplot([kafkaDelay0FullResults], labels=['Kafka opóźnienia 0ms - Półzbiór danych'])
+    plt.boxplot([kafkaDelay0HalfResults], labels=['Kafka opóźnienia 0ms - Półzbiór danych'])
     plt.title('Wykres pudełkowy Kafka opóźnienia 0ms - Półzbiór danych')
     plt.ylabel('Czas (s)')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfBoxChart.png')
