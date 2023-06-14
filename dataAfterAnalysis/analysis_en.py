@@ -12,6 +12,7 @@ parentPath = os.path.dirname(currentPath)
 grandparentPath = os.path.dirname(parentPath)
 pathToResults = grandparentPath + "\\results\\"
 pathToSaveCharts = parentPath + "\\charts_en\\"
+pathToSourceFile = grandparentPath +"\\DsDusznikMOB_PM25.csv"
 
 # Create PDF report
 canvas = canvas.Canvas(parentPath + "\\report_en.pdf", pagesize=letter)
@@ -44,6 +45,15 @@ coutSparkDelay3Full = sum([1 for f in os.listdir(pathToResults) if "test_spark_d
 coutSparkDelay0Full = sum([1 for f in os.listdir(pathToResults) if "test_spark_d0_full" in f])
 coutSparkDelay0Half = sum([1 for f in os.listdir(pathToResults) if "test_spark_d0_half" in f])
 
+
+countNonEmptyLine = 0
+
+with open(pathToSourceFile, 'r') as file:
+    csv_reader = csv.reader(file)
+
+    for row in csv_reader:
+        if any(row):
+            countNonEmptyLine += 1
 
 #kafkaDelay3Full ------------------------------------------------------------------------------
 
@@ -146,7 +156,8 @@ if(coutKafkaDelay3Full > 0 ):
         "Kafka test setup (kafkaDelay3Full)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "3ms",
-            "Full data set (qty)": len(kafkaDelay3FullResults),
+            "Full data set (qty)": countNonEmptyLine,
+            "Processed values (qty)": len(kafkaDelay3FullResults),
             "Number of tests performed": coutKafkaDelay3Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -171,6 +182,10 @@ if(coutKafkaDelay3Full > 0 ):
         }
     }
 
+    kafkaDelay3FullMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in kafkaDelay3Full]
+    }
+
     kafkaDelay3FullChartNames = [
         "kafkaDelay3FullHistogram.png",
         "kafkaDelay3FullLine.png",
@@ -190,6 +205,19 @@ if(coutKafkaDelay3Full > 0 ):
         for key, value in data.items():
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
+        pos -= 10
+
+    for section, values in kafkaDelay3FullMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):  
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])  
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
         pos -= 10
 
     inchValue = 7
@@ -302,7 +330,8 @@ if coutKafkaDelay0Full > 0:
         "Kafka test setup (kafkaDelay0Full)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(kafkaDelay0FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(kafkaDelay0FullResults),
             "Number of tests performed": coutKafkaDelay0Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -326,6 +355,10 @@ if coutKafkaDelay0Full > 0:
         }
     }
 
+    kafkaDelay0FullMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in kafkaDelay0Full]
+    }
+
     kafkaDelay0FullChartNames = [
             "kafkaDelay0FullHistogram.png",
             "kafkaDelay0FullLine.png",    
@@ -346,7 +379,20 @@ if coutKafkaDelay0Full > 0:
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
         pos -= 10
-        
+
+    for section, values in kafkaDelay0FullMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):  
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])  
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
+        pos -= 10
+
     inchValue = 7
     canvas.showPage()
     for name in kafkaDelay0FullChartNames:
@@ -423,7 +469,7 @@ if coutKafkaDelay0Half > 0:
     plt.clf()
 
     # kafkaDelay0Half Box Chart
-    plt.boxplot([kafkaDelay0FullResults], labels=['Kafka delay 0ms half'])
+    plt.boxplot([kafkaDelay0HalfResults], labels=['Kafka delay 0ms half'])
     plt.title('Kafka Box Chart delay 0ms full')
     plt.ylabel('Time (s)')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfBoxChart.png')
@@ -458,7 +504,8 @@ if coutKafkaDelay0Half > 0:
         "Kafka test setup (kafkaDelay0Half)": {
             "Technology": "Kafka Streams",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(kafkaDelay0HalfResults),
+            "Full data set (qty)": int(countNonEmptyLine/2),
+            "Processed values (qty)": len(kafkaDelay0HalfResults),
             "Number of tests performed": coutKafkaDelay0Half,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -482,6 +529,10 @@ if coutKafkaDelay0Half > 0:
         }
     }
 
+    kafkaDelay0HalfMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in kafkaDelay0Half]
+    }
+
     kafkaDelay0HalfChartNames = [
         "kafkaDelay0HalfHistogram.png",
         "kafkaDelay0HalfLine.png",
@@ -503,6 +554,18 @@ if coutKafkaDelay0Half > 0:
             pos -= 20
         pos -= 10
 
+    for section, values in kafkaDelay0HalfMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):  
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])  
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
+        pos -= 10
 
     inchValue = 7
     canvas.showPage()
@@ -611,7 +674,8 @@ if coutSparkDelay3Full > 0:
         "Spark test setup (sparkDelay3Full)": {
             "Technology": "Spark Structured Streaming",
             "Producer Delay (Send next message)": "3ms",
-            "Full data set (qty)": len(sparkDelay3FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(sparkDelay3FullResults),
             "Number of tests performed": coutSparkDelay3Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -635,6 +699,10 @@ if coutSparkDelay3Full > 0:
         }
     }
 
+    sparkDelay3FullMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in sparkDelay3Full]
+    }
+
     sparkDelay3FullChartNames = [    
         "sparkDelay3FullHistogram.png",    
         "sparkDelay3FullLine.png",    
@@ -655,6 +723,19 @@ if coutSparkDelay3Full > 0:
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
         pos -= 10
+
+    for section, values in sparkDelay3FullMean10.items():
+            canvas.setFont("Helvetica-Bold", 14)
+            canvas.drawString(100, pos, section)
+            pos -= 30
+            canvas.setFont("Helvetica", 12)
+
+            for i in range(0, len(values), 3):
+                row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+                canvas.drawString(120, pos, row)
+                pos -= 20
+
+            pos -= 10
 
     inchValue = 7
     canvas.showPage()
@@ -765,7 +846,8 @@ if coutSparkDelay0Full > 0:
         "Spark test setup (sparkDelay0Full)": {
             "Technology": "Spark Structured Streaming",
             "Producer Delay (Send next message)": "0ms",
-            "Full data set (qty)": len(sparkDelay0FullResults),
+            "Full data set (qty)":  countNonEmptyLine,
+            "Processed values (qty)": len(sparkDelay0FullResults),
             "Number of tests performed": coutSparkDelay0Full,
             "Start": "Timestamp from Producer",
             "End": "Timestamp from Consumer",
@@ -789,6 +871,10 @@ if coutSparkDelay0Full > 0:
         }
     }
 
+    sparkDelay0FullMean10 = {
+            "Average time for each sample ": [np.mean(x) for x in sparkDelay0Full]
+        }
+
     sparkDelay0FullChartNames = [
         "sparkDelay0FullHistogram.png",
         "sparkDelay0FullLine.png",
@@ -810,6 +896,19 @@ if coutSparkDelay0Full > 0:
             pos -= 20
         pos -= 10
 
+    for section, values in sparkDelay0FullMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
+        pos -= 10
+
     inchValue = 7
     canvas.showPage()
     for name in sparkDelay0FullChartNames:
@@ -818,7 +917,7 @@ if coutSparkDelay0Full > 0:
         if inchValue < 0 :
             inchValue = 7
             canvas.showPage()
-    
+
 
 
 #sparkDelay0Half ------------------------------------------------------------------------------
@@ -907,7 +1006,7 @@ if coutSparkDelay0Half > 0:
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalfFiltredLine.png')
     plt.clf()
 
-    #sparkDelay0HalfValue Line Chart 
+    #sparkDelay0HalfValue Line Chart
     plt.plot(sparkDelay0HalfValueResults)
     plt.title('Air Quality Chart')
     plt.ylabel('PM2.5 (ug/m3)')
@@ -920,7 +1019,8 @@ if coutSparkDelay0Half > 0:
     "Spark test setup (sparkDelay0Half)": {
         "Technology": "Spark Structured Streaming",
         "Producer Delay (Send next message)": "0ms",
-        "Full data set (qty)": len(sparkDelay0HalfResults),
+        "Full data set (qty)":  int(countNonEmptyLine/2),
+        "Processed values (qty)": len(sparkDelay0HalfResults),
         "Number of tests performed": coutSparkDelay0Half,
         "Start": "Timestamp from Producer",
         "End": "Timestamp from Consumer",
@@ -944,6 +1044,10 @@ if coutSparkDelay0Half > 0:
     }
 }
 
+    sparkDelay0HalfMean10 = {
+        "Average time for each sample ": [np.mean(x) for x in sparkDelay0Half]
+    }
+
     sparkDelay0HalfChartNames = [
         "sparkDelay0HalfHistogram.png",
         "sparkDelay0HalfLine.png",
@@ -962,6 +1066,19 @@ if coutSparkDelay0Half > 0:
         for key, value in data.items():
             canvas.drawString(120, pos, f"{key}: {value}")
             pos -= 20
+        pos -= 10
+
+    for section, values in sparkDelay0HalfMean10.items():
+        canvas.setFont("Helvetica-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Helvetica", 12)
+
+        for i in range(0, len(values), 3):
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
         pos -= 10
 
     inchValue = 7
