@@ -541,7 +541,7 @@ if coutKafkaDelay0Half > 0:
     plt.title('Air quality chart for data above average')
     plt.ylabel('PM2.5 (ug/m3)')
     plt.xlabel('Number of occurrences')
-    plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValuefLine.png')
+    plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValueLine.png')
     plt.clf()
 
     #kafkaDelay0HalfValueAverage Line Chart
