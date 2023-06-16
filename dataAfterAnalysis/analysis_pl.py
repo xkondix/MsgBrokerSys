@@ -1009,7 +1009,7 @@ if coutSparkDelay0Half > 0:
 
     sparkDelay0HalfValues = {
     "Konfiguracja testu Spark (sparkDelay0Half)": {
-        "Technologia": "Kafka Streams",
+        "Technologia": "Spark Structured Streaming",
         "Opóźnienie producenta (wysłanie następnej wiadomości)": "0ms",
         "Półzbiór danych (ilość)": len(sparkDelay0HalfResults),
         "Liczba przeprowadzonych testów": coutSparkDelay0Half,
