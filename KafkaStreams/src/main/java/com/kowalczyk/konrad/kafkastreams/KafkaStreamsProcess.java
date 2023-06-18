@@ -19,7 +19,7 @@ public class KafkaStreamsProcess {
     @Bean
     public Function<KStream<String, DataModel>, KStream<String, DataModel>> process() {
         return kStream -> kStream.filter((key, value) -> value.getValue() > 0)
-                .map((key, value) -> new KeyValue<>(value.getPositionCode(), new DataCalc(value)))
+                .map((key, value) -> new KeyValue<>(value.getId(), new DataCalc(value)))
                 .groupByKey(Grouped.with(Serdes.String(), new DataCalcSerde()))
                 .reduce((value1, value2) -> {
                     if (value1.getValues() == null || (START_DATE.equals(value2.getDate()))) {
@@ -27,10 +27,10 @@ public class KafkaStreamsProcess {
                         median.add(value1.getValue());
                         median.add(value2.getValue());
                         value1.setValues(median);
-                        value1.setValue(1);
+                        value1.setCount(1);
                     } else {
                         value1.addValue(value2.getValue());
-                        value1.setValue(value1.getValue() + 1);
+                        value1.setCount(value1.getCount() + 1);
                     }
                     value1.calculateMedian();
                     return value1;
@@ -46,7 +46,8 @@ public class KafkaStreamsProcess {
                         , value.getStationCode()
                         , value.getTimestampSend()
                         , 0
-                        , value.getMedianValue())));
+                        , value.getMedianValue()
+                        , value.getCount())));
 
     }
 

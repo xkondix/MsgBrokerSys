@@ -46,6 +46,9 @@ public class DataCalc {
     @Setter
     @Getter
     private List<Double> values;
+    @Setter
+    @Getter
+    private long count;
 
     public DataCalc(String date, double value, String positionCode, String unit, String averagingTime, String indicator
             , String stationCode, long timestampSend, long timestampConsumer, double medianValue, List<Double> values) {
@@ -74,6 +77,7 @@ public class DataCalc {
         this.timestampConsumer = 0;
         this.medianValue = 0.0;
         this.values = new ArrayList<>();
+        this.count = 0;
     }
 
     public DataCalc(DataModel dataModel) {
@@ -88,6 +92,7 @@ public class DataCalc {
         this.timestampConsumer = 0;
         this.medianValue = 0.0;
         this.values = null;
+        this.count = 0;
     }
 
     public void addValue(Double value) {
