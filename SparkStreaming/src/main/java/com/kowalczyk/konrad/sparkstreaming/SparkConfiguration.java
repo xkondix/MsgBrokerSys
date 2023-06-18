@@ -52,7 +52,9 @@ public class SparkConfiguration {
                 .add("stationCode", StringType)
                 .add("timestampSend", LongType)
                 .add("timestampConsumer", LongType)
-                .add("averageValue", DoubleType);
+                .add("averageValue", DoubleType)
+                .add("count", LongType)
+                .add("id", StringType);
 
     }
 
@@ -72,7 +74,7 @@ public class SparkConfiguration {
 
         Dataset<Row> process = df
                 .filter(col("value").gt(0))
-                .groupBy("positionCode")
+                .groupBy("id")
                 .agg(
                         expr("first(value) as value"),
                         expr("first(date) as date"),
@@ -80,13 +82,14 @@ public class SparkConfiguration {
                         expr("first(averagingTime) as averagingTime"),
                         expr("first(indicator) as indicator"),
                         expr("first(stationCode) as stationCode"),
+                        expr("first(positionCode) as positionCode"),
                         expr("first(timestampSend) as timestampSend"),
                         expr("first(timestampConsumer) as timestampConsumer"),
-//                        avg(col("value")).as("averageValue"))
+//                        avg(col("value")).as("averageValue"),
                         sum(col("value")).as("sum"),
                         count(col("value")).as("count"),
-                        expr("sum/count").as("averageValue"))
-                .select(
+                        expr("sum/count").as("averageValue")
+                ).select(
                         col("date"),
                         col("value"),
                         col("positionCode"),
@@ -94,9 +97,11 @@ public class SparkConfiguration {
                         col("averagingTime"),
                         col("indicator"),
                         col("stationCode"),
-                        col("count").as("timestampSend"),
+                        col("timestampSend"),
                         col("timestampConsumer"),
-                        col("averageValue")
+                        col("averageValue"),
+                        col("count"),
+                        col("id")
                 );
 
         process.selectExpr("CAST(positionCode AS STRING)", "to_json(struct(*)) AS value")
