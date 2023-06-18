@@ -85,11 +85,9 @@ public class SparkConfiguration {
                         expr("first(positionCode) as positionCode"),
                         expr("first(timestampSend) as timestampSend"),
                         expr("first(timestampConsumer) as timestampConsumer"),
-//                        avg(col("value")).as("averageValue"),
-                        sum(col("value")).as("sum"),
-                        count(col("value")).as("count"),
-                        expr("sum/count").as("averageValue")
-                ).select(
+                        avg(col("value")).as("averageValue"),
+                        count(col("value")).as("count"))
+                .select(
                         col("date"),
                         col("value"),
                         col("positionCode"),
