@@ -81,7 +81,7 @@ if(coutKafkaDelay3Full > 0 ):
                 valueAverage.append(float(row[9]))
                 endSubtractStartKafka.append((timestampEndKafka - timestampStartKafka) / 1000)
                 
-            kafkaDelay3Full.append(endSubtractStartKafka)
+            kafkaDelay3Full.append([endSubtractStartKafka[-1]])
             kafkaDelay3FullValue.append(value)
             kafkaDelay3FullValueAverage.append([valueAverage[-1]])
   
@@ -186,7 +186,7 @@ if coutKafkaDelay0Full > 0:
                 valueAverage.append(float(row[9]))
                 endSubtractStartKafka.append((timestampEndKafka - timestampStartKafka) / 1000)
 
-            kafkaDelay0Full.append(endSubtractStartKafka)
+            kafkaDelay0Full.append([endSubtractStartKafka[-1]])
             kafkaDelay0FullValue.append(value)
             kafkaDelay0FullValueAverage.append([valueAverage[-1]])
 
@@ -291,7 +291,7 @@ if coutKafkaDelay0Half > 0:
                 valueAverage.append(float(row[9]))
                 endSubtractStartKafka.append((timestampEndKafka - timestampStartKafka) / 1000)
 
-            kafkaDelay0Half.append(endSubtractStartKafka)
+            kafkaDelay0Half.append([endSubtractStartKafka[-1]])
             kafkaDelay0HalfValue.append(value)
             kafkaDelay0HalfValueAverage.append([valueAverage[-1]])
             
@@ -395,7 +395,7 @@ if coutSparkDelay3Full > 0:
                 value.append(float(row[1]))
                 valueAverage.append(float(row[9]))
                 endSubtractStartSpark.append((timestampEndSpark - timestampStartSpark) / 1000)
-            sparkDelay3Full.append(endSubtractStartSpark)
+            sparkDelay3Full.append([endSubtractStartSpark[-1]])
             sparkDelay3FullValue.append(value)
             sparkDelay3FullValueAverage.append([valueAverage[-1]])
 
@@ -498,7 +498,7 @@ if coutSparkDelay0Full > 0:
                 valueAverage.append(float(row[9]))
                 endSubtractStartSpark.append((timestampEndSpark - timestampStartSpark) / 1000)
 
-            sparkDelay0Full.append(endSubtractStartSpark)
+            sparkDelay0Full.append([endSubtractStartSpark[-1]])
             sparkDelay0FullValue.append(value)
             sparkDelay0FullValueAverage.append([valueAverage[-1]])
 
@@ -601,7 +601,7 @@ if coutSparkDelay0Half > 0:
                 valueAverage.append(float(row[9]))
                 endSubtractStartSpark.append((timestampEndSpark - timestampStartSpark) / 1000)
 
-            sparkDelay0Half.append(endSubtractStartSpark)
+            sparkDelay0Half.append([endSubtractStartSpark[-1]])
             sparkDelay0HalfValue.append(value)
             sparkDelay0HalfValueAverage.append([valueAverage[-1]])
 
