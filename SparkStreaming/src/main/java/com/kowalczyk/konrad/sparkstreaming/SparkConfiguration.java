@@ -52,7 +52,9 @@ public class SparkConfiguration {
                 .add("stationCode", StringType)
                 .add("timestampSend", LongType)
                 .add("timestampConsumer", LongType)
-                .add("medianValue", DoubleType);
+                .add("medianValue", DoubleType)
+                .add("count", LongType)
+                .add("id", StringType);
 
     }
 
@@ -72,7 +74,7 @@ public class SparkConfiguration {
 
         Dataset<Row> process = df
                 .filter(col("value").gt(0))
-                .groupBy("positionCode")
+                .groupBy("id")
                 .agg(
                         expr("first(value) as value"),
                         expr("first(date) as date"),
@@ -80,8 +82,10 @@ public class SparkConfiguration {
                         expr("first(averagingTime) as averagingTime"),
                         expr("first(indicator) as indicator"),
                         expr("first(stationCode) as stationCode"),
+                        expr("first(positionCode) as positionCode"),
                         expr("first(timestampSend) as timestampSend"),
                         expr("first(timestampConsumer) as timestampConsumer"),
+                        expr("count(value) as count"),
                         callUDF("percentile_approx", col("value"), lit(0.5)).as("medianValue")
                 ).select(
                         col("date"),
@@ -93,12 +97,14 @@ public class SparkConfiguration {
                         col("stationCode"),
                         col("timestampSend"),
                         col("timestampConsumer"),
-                        col("medianValue")
+                        col("medianValue"),
+                        col("count"),
+                        col("id")
                 );
 
         process.selectExpr("CAST(positionCode AS STRING)", "to_json(struct(*)) AS value")
                 .writeStream()
-                .outputMode(OutputMode.Complete())
+                .outputMode(OutputMode.Update())
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092")
                 .option("topic", "Summary")
