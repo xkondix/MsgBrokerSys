@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -24,20 +25,21 @@ public class IoTSimulation {
         try {
             String path = Paths.get("./DsDusznikMOB_PM25.csv").toAbsolutePath().normalize().toString();
             CSVReader reader = new CSVReaderBuilder(new FileReader(path)).build();
+            String uniqueID = UUID.randomUUID().toString();
             return StreamSupport.stream(reader.spliterator(), false)
-                    .map(this::mapToDataModel).collect(Collectors.toList());
+                    .map(line -> mapToDataModel(line, uniqueID)).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new ArrayList<>();
     }
 
-    private DataModel mapToDataModel(String[] line) {
+    private DataModel mapToDataModel(String[] line, String uniqueID) {
         try {
-            return new DataModel(line[0], Double.parseDouble(line[1]), line[2], line[3], line[4], line[5], line[6]);
+            return new DataModel(line[0], Double.parseDouble(line[1]), line[2], line[3], line[4], line[5], line[6], uniqueID);
 
         } catch (NumberFormatException e) {
-            return new DataModel(line[0], 0, line[2], line[3], line[4], line[5], line[6]);
+            return new DataModel(line[0], 0, line[2], line[3], line[4], line[5], line[6], uniqueID);
 
         }
     }
