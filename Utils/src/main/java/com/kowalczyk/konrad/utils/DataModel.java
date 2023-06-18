@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -36,9 +37,16 @@ public class DataModel {
     @Setter
     @Getter
     private double averageValue;
+    @Setter
+    @Getter
+    private long count;
+    @Setter
+    @Getter
+    private String id;
 
 
-    public DataModel(String date, double value, String positionCode, String unit, String averagingTime, String indicator, String stationCode) {
+    public DataModel(String date, double value, String positionCode, String unit, String averagingTime, String indicator
+            , String stationCode, String id) {
         this.date = date;
         this.value = value;
         this.positionCode = positionCode;
@@ -46,6 +54,8 @@ public class DataModel {
         this.averagingTime = averagingTime;
         this.indicator = indicator;
         this.stationCode = stationCode;
+        this.count = 0;
+        this.id = id;
     }
 
     public DataModel(String date, double value, String positionCode, String unit, String averagingTime, String indicator
@@ -60,6 +70,8 @@ public class DataModel {
         this.timestampSend = timestampSend;
         this.timestampConsumer = timestampConsumer;
         this.averageValue = averageValue;
+        this.id = StringUtils.EMPTY;
+        this.count = 0;
     }
 
     public DataModel() {
@@ -75,7 +87,8 @@ public class DataModel {
                 , stationCode
                 , String.valueOf(timestampSend)
                 , String.valueOf(timestampConsumer)
-                , String.valueOf(averageValue)};
+                , String.valueOf(averageValue)
+                , String.valueOf(count)};
     }
 
 
