@@ -59,7 +59,7 @@ public class DataModel {
     }
 
     public DataModel(String date, double value, String positionCode, String unit, String averagingTime, String indicator
-            , String stationCode, long timestampSend, long timestampConsumer, double averageValue) {
+            , String stationCode, long timestampSend, long timestampConsumer, double averageValue, long count) {
         this.date = date;
         this.value = value;
         this.positionCode = positionCode;
@@ -71,7 +71,7 @@ public class DataModel {
         this.timestampConsumer = timestampConsumer;
         this.averageValue = averageValue;
         this.id = StringUtils.EMPTY;
-        this.count = 0;
+        this.count = count;
     }
 
     public DataModel() {

@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataCalc {
@@ -48,7 +47,7 @@ public class DataCalc {
     private double sum;
     @Setter
     @Getter
-    private double count;
+    private long count;
 
 
     public DataCalc(String date, double value, String positionCode, String unit, String averagingTime, String indicator
@@ -94,7 +93,5 @@ public class DataCalc {
         this.sum = 0;
         this.count = 0;
     }
-
-
 
 }

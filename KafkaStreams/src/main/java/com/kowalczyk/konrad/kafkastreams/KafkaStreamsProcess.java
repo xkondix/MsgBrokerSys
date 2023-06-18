@@ -9,7 +9,6 @@ import org.apache.kafka.streams.kstream.Materialized;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
 import java.util.function.Function;
 
 @Configuration
@@ -20,7 +19,7 @@ public class KafkaStreamsProcess {
     @Bean
     public Function<KStream<String, DataModel>, KStream<String, DataModel>> process() {
         return kStream -> kStream.filter((key, value) -> value.getValue() > 0)
-                .map((key, value) -> new KeyValue<>(value.getPositionCode(), new DataCalc(value)))
+                .map((key, value) -> new KeyValue<>(value.getId(), new DataCalc(value)))
                 .groupByKey(Grouped.with(Serdes.String(), new DataCalcSerde()))
                 .aggregate(DataCalc::new,
                         (key, value, aggregate) -> {
@@ -44,7 +43,8 @@ public class KafkaStreamsProcess {
                         , value.getStationCode()
                         , value.getTimestampSend()
                         , 0
-                        , value.getAverageValue())));
+                        , value.getAverageValue()
+                        , value.getCount())));
 
     }
 
