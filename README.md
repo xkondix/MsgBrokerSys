@@ -5,7 +5,7 @@ Operations used in data processing :
 - Reading values from Topic "Order"
 - Filtering invalid data that has a value of 0. I inserted 0 for missing fields with a value.
 - Grouping data by id key
-- Aggregation of values (counting average and number of occurrences)
+- Aggregation of values (counting average and number of processed values)
 - Sending results on Topic "Summary"
 
 As for the results, in the Python script I took into consideration only the last result. I did so because I set timestampSend as the first timestamp during agg.
