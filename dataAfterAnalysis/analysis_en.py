@@ -146,8 +146,8 @@ if(coutKafkaDelay3Full > 0 ):
         "Kafka mean": {
             "End Subtract Start": kafkaDelay3FullMean
         },
-        "Kafka median (PM2.5)": {
-            "Median value": kafkaDelay3FullValueAverageResults[0]
+        "Kafka mean (PM2.5)": {
+            "Mean value": kafkaDelay3FullValueAverageResults[0]
         }
     }
 
@@ -266,8 +266,8 @@ if coutKafkaDelay0Full > 0:
         "Kafka mean": {
             "End Subtract Start": kafkaDelay0FullMean
         },
-        "Kafka median (PM2.5)": {
-            "Median value": kafkaDelay0FullValueAverageResults[0]
+        "Kafka mean (PM2.5)": {
+            "Mean value": kafkaDelay0FullValueAverageResults[0]
         }
     }
 
@@ -388,8 +388,8 @@ if coutKafkaDelay0Half > 0:
         "Kafka mean": {
             "End Subtract Start": kafkaDelay0HalfMean
         },
-         "Kafka median (PM2.5)": {
-            "Median value": kafkaDelay0HalfValueAverageResults[0]
+         "Kafka mean (PM2.5)": {
+            "Mean value": kafkaDelay0HalfValueAverageResults[0]
          }
     }
 
@@ -504,8 +504,8 @@ if coutSparkDelay3Full > 0:
         "Spark mean": {
             "End Subtract Start": sparkDelay3FullMean
         },
-        "Spark median (PM2.5)": {
-            "Median value": sparkDelay3FullValueAverageResults[0]
+        "Spark mean (PM2.5)": {
+            "Mean value": sparkDelay3FullValueAverageResults[0]
         }
     }
 
@@ -623,8 +623,8 @@ if coutSparkDelay0Full > 0:
         "Spark mean": {
             "End Subtract Start": sparkDelay0FullMean
         },
-        "Spark median (PM2.5)": {
-            "Median value": sparkDelay0FullValueAverageResults[0]
+        "Spark mean (PM2.5)": {
+            "Mean value": sparkDelay0FullValueAverageResults[0]
         }
     }
 
@@ -740,8 +740,8 @@ if coutSparkDelay0Half > 0:
     "Spark mean": {
         "End Subtract Start": sparkDelay0HalfMean
     },
-    "Spark median (PM2.5)": {
-        "Median value": sparkDelay0HalfValueAverageResults[0]
+    "Spark mean (PM2.5)": {
+        "Mean value": sparkDelay0HalfValueAverageResults[0]
     }
 }
 

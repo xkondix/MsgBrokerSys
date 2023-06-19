@@ -152,8 +152,8 @@ if(coutKafkaDelay3Full > 0 ):
             "Kafka średnia": {
                 "Różnica Koniec - Start": kafkaDelay3FullMean
             },
-            "Kafka mediana (PM2.5)": {
-                "Wartość Mediany": kafkaDelay3FullValueAverageResults[0]
+            "Kafka średnia (PM2.5)": {
+                "Wartość Średniej": kafkaDelay3FullValueAverageResults[0]
          	}
         }
 
@@ -270,8 +270,8 @@ if coutKafkaDelay0Full > 0:
         "Kafka średnia": {
             "Różnica Koniec - Start": kafkaDelay0FullMean
         },
-         "Kafka mediana (PM2.5)": {
-             "Wartość Mediany": kafkaDelay0FullValueAverageResults[0]
+         "Kafka średnia (PM2.5)": {
+             "Wartość Średniej": kafkaDelay0FullValueAverageResults[0]
         }
 }
 
@@ -390,8 +390,8 @@ if coutKafkaDelay0Half > 0:
         "Kafka średnia": {
             "Różnica Koniec - Start": kafkaDelay0HalfMean
         },
-          "Kafka mediana (PM2.5)": {
-             "Wartość Mediany": kafkaDelay0HalfValueAverageResults[0]
+          "Kafka średnia (PM2.5)": {
+             "Wartość Średniej": kafkaDelay0HalfValueAverageResults[0]
           }
     }
 
@@ -507,8 +507,8 @@ if coutSparkDelay3Full > 0:
         "Spark średnia": {
             "Różnica Koniec - Start": sparkDelay3FullMean
         },
-         "Spark mediana (PM2.5)": {
-             "Wartość Mediany": sparkDelay3FullValueAverageResults[0]
+         "Spark średnia (PM2.5)": {
+             "Wartość Średniej": sparkDelay3FullValueAverageResults[0]
          }
     }
 
@@ -623,8 +623,8 @@ if coutSparkDelay0Full > 0:
         "Spark średnia": {
             "Różnica Koniec - Start": sparkDelay0FullMean
         },
-        "Spark mediana (PM2.5)": {
-            "Wartość Mediany": sparkDelay0FullValueAverageResults[0]
+        "Spark średnia (PM2.5)": {
+            "Wartość Średniej": sparkDelay0FullValueAverageResults[0]
         }
     }
 
@@ -741,8 +741,8 @@ if coutSparkDelay0Half > 0:
     "Spark średnia": {
         "Różnica Koniec - Start": sparkDelay0HalfMean
     },
-    "Spark median (PM2.5)": {
-        "Wartość Mediany": sparkDelay0HalfValueAverageResults[0]
+    "Spark średnia (PM2.5)": {
+        "Wartość Średniej": sparkDelay0HalfValueAverageResults[0]
     }
 }
 
