@@ -103,24 +103,24 @@ if(coutKafkaDelay3Full > 0 ):
 
 
     #kafkaDelay3Full median values
-    kafkaDelay3FullMedian = np.median(kafkaDelay3FullResults)
+    kafkaDelay3FullMedian = np.median(kafkaDelay3Full)
 
     #kafkaDelay3Full standard deviation
-    kafkaDelay3FullStdDev = np.std(kafkaDelay3FullResults)
+    kafkaDelay3FullStdDev = np.std(kafkaDelay3Full)
 
     #kafkaDelay3Full interquartile range
-    kafkaDelay3FullIQR = np.percentile(kafkaDelay3FullResults, 75) - np.percentile(kafkaDelay3FullResults, 25)
+    kafkaDelay3FullIQR = np.percentile(kafkaDelay3Full, 75) - np.percentile(kafkaDelay3Full, 25)
 
     #kafkaDelay3Full mean
-    kafkaDelay3FullMean = np.mean(kafkaDelay3FullResults)
+    kafkaDelay3FullMean = np.mean(kafkaDelay3Full)
 
     #kafkaDelay3Full histogram
-    kafkaDelay3FullHistogram = np.histogram(kafkaDelay3FullResults)
+    kafkaDelay3FullHistogram = np.histogram(kafkaDelay3Full)
 
     #kafkaDelay3Full removal of data beyond deviation from the mean
     kafkaDelay3FullLowerBound = kafkaDelay3FullMean - 3*kafkaDelay3FullStdDev
     kafkaDelay3FullUpperBound = kafkaDelay3FullMean + 3*kafkaDelay3FullStdDev
-    kafkaDelay3FullFilteredData = np.where(np.logical_or(kafkaDelay3FullResults < kafkaDelay3FullLowerBound, kafkaDelay3FullResults > kafkaDelay3FullUpperBound), np.nan, kafkaDelay3FullResults)
+    kafkaDelay3FullFilteredData = np.where(np.logical_or(kafkaDelay3Full < kafkaDelay3FullLowerBound, kafkaDelay3Full > kafkaDelay3FullUpperBound), np.nan, kafkaDelay3Full)
 
 
     kafkaDelay3FullValues = {
@@ -157,6 +157,9 @@ if(coutKafkaDelay3Full > 0 ):
          	}
         }
 
+    kafkaDelay3FullMean10 = {
+        "Czas wszystkich prób ": [np.mean(x) for x in kafkaDelay3Full]
+    }
 
     # Set the initial y position of the text
     pos = 750
@@ -170,7 +173,19 @@ if(coutKafkaDelay3Full > 0 ):
             pos -= 20
         pos -= 10
 
-    inchValue = 7
+    for section, values in kafkaDelay3FullMean10.items():
+            canvas.setFont("Arial-Bold", 14)
+            canvas.drawString(100, pos, section)
+            pos -= 30
+            canvas.setFont("Arial", 12)
+
+            for i in range(0, len(values), 3):
+                row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+                canvas.drawString(120, pos, row)
+                pos -= 20
+
+            pos -= 10
+
     canvas.showPage()
 
 
@@ -207,24 +222,24 @@ if coutKafkaDelay0Full > 0:
     kafkaDelay0FullValueAverageResults = [x / coutKafkaDelay0Full for x in kafkaDelay0FullValueAverageSum]
 
     # kafkaDelay0Full median values
-    kafkaDelay0FullMedian = np.median(kafkaDelay0FullResults)
+    kafkaDelay0FullMedian = np.median(kafkaDelay0Full)
 
     # kafkaDelay0Full standard deviation
-    kafkaDelay0FullStdDev = np.std(kafkaDelay0FullResults)
+    kafkaDelay0FullStdDev = np.std(kafkaDelay0Full)
 
     # kafkaDelay0Full interquartile range
-    kafkaDelay0FullIQR = np.percentile(kafkaDelay0FullResults, 75) - np.percentile(kafkaDelay0FullResults, 25)
+    kafkaDelay0FullIQR = np.percentile(kafkaDelay0Full, 75) - np.percentile(kafkaDelay0Full, 25)
 
     # kafkaDelay0Full mean
-    kafkaDelay0FullMean = np.mean(kafkaDelay0FullResults)
+    kafkaDelay0FullMean = np.mean(kafkaDelay0Full)
 
     # kafkaDelay0Full histogram
-    kafkaDelay0FullHistogram = np.histogram(kafkaDelay0FullResults)
+    kafkaDelay0FullHistogram = np.histogram(kafkaDelay0Full)
 
     # kafkaDelay0Full removal of data beyond deviation from the mean
     kafkaDelay0FullLowerBound = kafkaDelay0FullMean - 3 * kafkaDelay0FullStdDev
     kafkaDelay0FullUpperBound = kafkaDelay0FullMean + 3 * kafkaDelay0FullStdDev
-    kafkaDelay0FullFilteredData = np.where(np.logical_or(kafkaDelay0FullResults < kafkaDelay0FullLowerBound, kafkaDelay0FullResults > kafkaDelay0FullUpperBound), np.nan, kafkaDelay0FullResults)
+    kafkaDelay0FullFilteredData = np.where(np.logical_or(kafkaDelay0Full < kafkaDelay0FullLowerBound, kafkaDelay0Full > kafkaDelay0FullUpperBound), np.nan, kafkaDelay0Full)
 
 
     kafkaDelay0FullValues = {
@@ -260,6 +275,9 @@ if coutKafkaDelay0Full > 0:
         }
 }
 
+    kafkaDelay0FullMean10 = {
+        "Czas wszystkich prób ": [np.mean(x) for x in kafkaDelay0Full]
+    }
 
     # Set the initial y position of the text
     pos = 750
@@ -273,7 +291,19 @@ if coutKafkaDelay0Full > 0:
             pos -= 20
         pos -= 10
 
-    inchValue = 7
+    for section, values in kafkaDelay0FullMean10.items():
+            canvas.setFont("Arial-Bold", 14)
+            canvas.drawString(100, pos, section)
+            pos -= 30
+            canvas.setFont("Arial", 12)
+
+            for i in range(0, len(values), 3):
+                row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+                canvas.drawString(120, pos, row)
+                pos -= 20
+
+            pos -= 10
+
     canvas.showPage()
 
 
@@ -311,24 +341,24 @@ if coutKafkaDelay0Half > 0:
     kafkaDelay0HalfValueAverageResults = [x / coutKafkaDelay0Half for x in kafkaDelay0HalfValueAverageSum]
 
     # kafkaDelay0Half median values
-    kafkaDelay0HalfMedian = np.median(kafkaDelay0HalfResults)
+    kafkaDelay0HalfMedian = np.median(kafkaDelay0Half)
 
     # kafkaDelay0Half standard deviation
-    kafkaDelay0HalfStdDev = np.std(kafkaDelay0HalfResults)
+    kafkaDelay0HalfStdDev = np.std(kafkaDelay0Half)
 
     # kafkaDelay0Half interquartile range
-    kafkaDelay0HalfIQR = np.percentile(kafkaDelay0HalfResults, 75) - np.percentile(kafkaDelay0HalfResults, 25)
+    kafkaDelay0HalfIQR = np.percentile(kafkaDelay0Half, 75) - np.percentile(kafkaDelay0Half, 25)
 
     # kafkaDelay0Half mean
-    kafkaDelay0HalfMean = np.mean(kafkaDelay0HalfResults)
+    kafkaDelay0HalfMean = np.mean(kafkaDelay0Half)
 
     # kafkaDelay0Half histogram
-    kafkaDelay0HalfHistogram = np.histogram(kafkaDelay0HalfResults)
+    kafkaDelay0HalfHistogram = np.histogram(kafkaDelay0Half)
 
     # kafkaDelay0Half removal of data beyond deviation from the mean
     kafkaDelay0HalfLowerBound = kafkaDelay0HalfMean - 3 * kafkaDelay0HalfStdDev
     kafkaDelay0HalfUpperBound = kafkaDelay0HalfMean + 3 * kafkaDelay0HalfStdDev
-    kafkaDelay0HalfFilteredData = np.where(np.logical_or(kafkaDelay0HalfResults < kafkaDelay0HalfLowerBound, kafkaDelay0HalfResults > kafkaDelay0HalfUpperBound), np.nan, kafkaDelay0HalfResults)
+    kafkaDelay0HalfFilteredData = np.where(np.logical_or(kafkaDelay0Half < kafkaDelay0HalfLowerBound, kafkaDelay0Half > kafkaDelay0HalfUpperBound), np.nan, kafkaDelay0Half)
 
 
 
@@ -365,6 +395,9 @@ if coutKafkaDelay0Half > 0:
           }
     }
 
+    kafkaDelay0HalfMean10 = {
+        "Czas wszystkich prób ": [np.mean(x) for x in kafkaDelay0Half]
+    }
 
     # Set the initial y position of the text
     pos = 750
@@ -379,7 +412,18 @@ if coutKafkaDelay0Half > 0:
         pos -= 10
 
 
-    inchValue = 7
+    for section, values in kafkaDelay0HalfMean10.items():
+        canvas.setFont("Arial-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Arial", 12)
+
+        for i in range(0, len(values), 3):
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
+        pos -= 10
     canvas.showPage()
 
 
@@ -415,24 +459,24 @@ if coutSparkDelay3Full > 0:
     sparkDelay3FullValueAverageResults = [x / coutSparkDelay3Full for x in sparkDelay3FullValueAverageSum]
 
     # sparkDelay3Full median values
-    sparkDelay3FullMedian = np.median(sparkDelay3FullResults)
+    sparkDelay3FullMedian = np.median(sparkDelay3Full)
 
     # sparkDelay3Full standard deviation
-    sparkDelay3FullStdDev = np.std(sparkDelay3FullResults)
+    sparkDelay3FullStdDev = np.std(sparkDelay3Full)
 
     # sparkDelay3Full interquartile range
-    sparkDelay3FullIQR = np.percentile(sparkDelay3FullResults, 75) - np.percentile(sparkDelay3FullResults, 25)
+    sparkDelay3FullIQR = np.percentile(sparkDelay3Full, 75) - np.percentile(sparkDelay3Full, 25)
 
     # sparkDelay3Full mean
-    sparkDelay3FullMean = np.mean(sparkDelay3FullResults)
+    sparkDelay3FullMean = np.mean(sparkDelay3Full)
 
     # sparkDelay3Full histogram
-    sparkDelay3FullHistogram = np.histogram(sparkDelay3FullResults)
+    sparkDelay3FullHistogram = np.histogram(sparkDelay3Full)
 
     # sparkDelay3Full removal of data beyond deviation from the mean
     sparkDelay3FullLowerBound = sparkDelay3FullMean - 3 * sparkDelay3FullStdDev
     sparkDelay3FullUpperBound = sparkDelay3FullMean + 3 * sparkDelay3FullStdDev
-    sparkDelay3FullFilteredData = np.where(np.logical_or(sparkDelay3FullResults < sparkDelay3FullLowerBound, sparkDelay3FullResults > sparkDelay3FullUpperBound), np.nan, sparkDelay3FullResults)
+    sparkDelay3FullFilteredData = np.where(np.logical_or(sparkDelay3Full < sparkDelay3FullLowerBound, sparkDelay3Full > sparkDelay3FullUpperBound), np.nan, sparkDelay3Full)
 
 
     sparkDelay3FullValues = {
@@ -468,6 +512,9 @@ if coutSparkDelay3Full > 0:
          }
     }
 
+    sparkDelay3FullMean10 = {
+        "Czas wszystkich prób ": [np.mean(x) for x in sparkDelay3Full]
+    }
 
     # Set the initial y position of the text
     pos = 750
@@ -481,9 +528,20 @@ if coutSparkDelay3Full > 0:
             pos -= 20
         pos -= 10
 
-    inchValue = 7
-    canvas.showPage()
 
+    for section, values in sparkDelay3FullMean10.items():
+        canvas.setFont("Arial-Bold", 14)
+        canvas.drawString(100, pos, section)
+        pos -= 30
+        canvas.setFont("Arial", 12)
+
+        for i in range(0, len(values), 3):
+            row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+            canvas.drawString(120, pos, row)
+            pos -= 20
+
+        pos -= 10
+    canvas.showPage()
 
 #sparkDelay0Full ------------------------------------------------------------------------------
 
@@ -517,24 +575,24 @@ if coutSparkDelay0Full > 0:
     sparkDelay0FullValueAverageResults = [x / coutSparkDelay0Full for x in sparkDelay0FullValueAverageSum]
 
     # sparkDelay0Full median values
-    sparkDelay0FullMedian = np.median(sparkDelay0FullResults)
+    sparkDelay0FullMedian = np.median(sparkDelay0Full)
 
     # sparkDelay0Full standard deviation
-    sparkDelay0FullStdDev = np.std(sparkDelay0FullResults)
+    sparkDelay0FullStdDev = np.std(sparkDelay0Full)
 
     # sparkDelay0Full interquartile range
-    sparkDelay0FullIQR = np.percentile(sparkDelay0FullResults, 75) - np.percentile(sparkDelay0FullResults, 25)
+    sparkDelay0FullIQR = np.percentile(sparkDelay0Full, 75) - np.percentile(sparkDelay0Full, 25)
 
     # sparkDelay0Full mean
-    sparkDelay0FullMean = np.mean(sparkDelay0FullResults)
+    sparkDelay0FullMean = np.mean(sparkDelay0Full)
 
     # sparkDelay0Full histogram
-    sparkDelay0FullHistogram = np.histogram(sparkDelay0FullResults)
+    sparkDelay0FullHistogram = np.histogram(sparkDelay0Full)
 
     # sparkDelay0Full removal of data beyond deviation from the mean
     sparkDelay0FullLowerBound = sparkDelay0FullMean - 3 * sparkDelay0FullStdDev
     sparkDelay0FullUpperBound = sparkDelay0FullMean + 3 * sparkDelay0FullStdDev
-    sparkDelay0FullFilteredData = np.where(np.logical_or(sparkDelay0FullResults < sparkDelay0FullLowerBound, sparkDelay0FullResults > sparkDelay0FullUpperBound), np.nan, sparkDelay0FullResults)
+    sparkDelay0FullFilteredData = np.where(np.logical_or(sparkDelay0Full < sparkDelay0FullLowerBound, sparkDelay0Full > sparkDelay0FullUpperBound), np.nan, sparkDelay0Full)
 
 
     sparkDelay0FullValues = {
@@ -570,6 +628,9 @@ if coutSparkDelay0Full > 0:
         }
     }
 
+    sparkDelay0FullMean10 = {
+            "Czas wszystkich prób": [np.mean(x) for x in sparkDelay0Full]
+        }
 
      # Set the initial y position of the text
     pos = 750
@@ -583,7 +644,19 @@ if coutSparkDelay0Full > 0:
             pos -= 20
         pos -= 10
 
-    inchValue = 7
+    for section, values in sparkDelay0FullMean10.items():
+            canvas.setFont("Arial-Bold", 14)
+            canvas.drawString(100, pos, section)
+            pos -= 30
+            canvas.setFont("Arial", 12)
+
+            for i in range(0, len(values), 3):
+                row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+                canvas.drawString(120, pos, row)
+                pos -= 20
+
+            pos -= 10
+
     canvas.showPage()
 
 
@@ -620,24 +693,24 @@ if coutSparkDelay0Half > 0:
 
 
     # sparkDelay0Half median values
-    sparkDelay0HalfMedian = np.median(sparkDelay0HalfResults)
+    sparkDelay0HalfMedian = np.median(sparkDelay0Half)
 
     # sparkDelay0Half standard deviation
-    sparkDelay0HalfStdDev = np.std(sparkDelay0HalfResults)
+    sparkDelay0HalfStdDev = np.std(sparkDelay0Half)
 
     # sparkDelay0Half interquartile range
-    sparkDelay0HalfIQR = np.percentile(sparkDelay0HalfResults, 75) - np.percentile(sparkDelay0HalfResults, 25)
+    sparkDelay0HalfIQR = np.percentile(sparkDelay0Half, 75) - np.percentile(sparkDelay0Half, 25)
 
     # sparkDelay0Half mean
-    sparkDelay0HalfMean = np.mean(sparkDelay0HalfResults)
+    sparkDelay0HalfMean = np.mean(sparkDelay0Half)
 
     # sparkDelay0Half histogram
-    sparkDelay0HalfHistogram = np.histogram(sparkDelay0HalfResults)
+    sparkDelay0HalfHistogram = np.histogram(sparkDelay0Half)
 
     # sparkDelay0Half removal of data beyond deviation from the mean
     sparkDelay0HalfLowerBound = sparkDelay0HalfMean - 3 * sparkDelay0HalfStdDev
     sparkDelay0HalfUpperBound = sparkDelay0HalfMean + 3 * sparkDelay0HalfStdDev
-    sparkDelay0HalfFilteredData = np.where(np.logical_or(sparkDelay0HalfResults < sparkDelay0HalfLowerBound, sparkDelay0HalfResults > sparkDelay0HalfUpperBound), np.nan, sparkDelay0HalfResults)
+    sparkDelay0HalfFilteredData = np.where(np.logical_or(sparkDelay0Half < sparkDelay0HalfLowerBound, sparkDelay0Half > sparkDelay0HalfUpperBound), np.nan, sparkDelay0Half)
 
 
     sparkDelay0HalfValues = {
@@ -673,6 +746,9 @@ if coutSparkDelay0Half > 0:
     }
 }
 
+    sparkDelay0HalfMean10 = {
+        "Czas wszystkich prób": [np.mean(x) for x in sparkDelay0Half]
+    }
 
     pos = 750
     for section, data in sparkDelay0HalfValues.items():
@@ -685,7 +761,18 @@ if coutSparkDelay0Half > 0:
             pos -= 20
         pos -= 10
 
-    inchValue = 7
+    for section, values in sparkDelay0HalfMean10.items():
+            canvas.setFont("Arial-Bold", 14)
+            canvas.drawString(100, pos, section)
+            pos -= 30
+            canvas.setFont("Arial", 12)
+
+            for i in range(0, len(values), 3):
+                row = "    ".join(["{:<10}".format(value) for value in values[i:i+3]])
+                canvas.drawString(120, pos, row)
+                pos -= 20
+
+            pos -= 10
 
 canvas.save()
 
