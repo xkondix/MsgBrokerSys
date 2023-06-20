@@ -27,7 +27,7 @@ public class KafkaStreamsProcess {
                         median.add(value1.getValue());
                         median.add(value2.getValue());
                         value1.setValues(median);
-                        value1.setCount(1);
+                        value1.setCount(2);
                     } else {
                         value1.addValue(value2.getValue());
                         value1.setCount(value1.getCount() + 1);
