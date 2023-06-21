@@ -25,6 +25,13 @@ In the Spark solution, I used the built-in functions for avg and count. In addit
 ### Problems
 The problem was the use of grouping without time windows. Time windows eliminate many problems like clearing values for a key after grouping. I solved this in both cases by adding a new id field that is generated in the IoTSimulation class for the entire sample.
 
+### Errors
+If there is an error in the spark, it will probably be about the scheme. The problem can occur when changing the branch as the processing is not completed and the application is restarted.
+For solving this problem there are 2 solutions:
+- Remove all things from the "checkpointLocation" folder.
+- Add such a piece of code  "sparkSession().conf().set("spark.sql.streaming.stateStore.stateSchemaCheck", "false");" of course, you can also add when creating a session.
+
+
 ### Results
 Examples of results used for test below (folder "results"), instead of *, insert numbers from 1-10.
 
