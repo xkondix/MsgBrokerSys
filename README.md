@@ -3,7 +3,7 @@
 The test focuses on measuring the time taken by Kafka Streams and Spark Structured Streaming to calculate the median.
 I would like to add here that for the Spark Structured Streaming solution I do not count the median more accurately as for Kafka Streams.
 
-Operations used in data processing :
+Operations used in data processing:
 - Reading values from Topic "Order"
 - Filtering invalid data that has a value of 0. I inserted 0 for missing fields with a value.
 - Grouping data by id key
@@ -27,6 +27,12 @@ In addition, I used update mode as output mode, which allowed me to not send dat
 
 ### Problems
 The problem was the use of grouping without time windows. Time windows eliminate many problems like clearing values for a key after grouping. I solved this in both cases by adding a new id field that is generated in the IoTSimulation class for the entire sample.
+
+### Errors
+If there is an error in the spark, it will probably be about the scheme. The problem can occur when changing the branch as the processing is not completed and the application is restarted.
+For solving this problem there are 2 solutions: 
+- Remove all things from the "checkpointLocation" folder.
+- Add such a piece of code  "sparkSession().conf().set("spark.sql.streaming.stateStore.stateSchemaCheck", "false");" of course, you can also add when creating a session.
 
 ### Results
 Examples of results used for test below (folder "results"), instead of *, insert numbers from 1-10.
