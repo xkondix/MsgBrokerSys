@@ -36,17 +36,17 @@ For solving this problem there are 2 solutions:
 ### Results
 Examples of results used for test below (folder "results"), instead of *, insert numbers from 1-10.
 
-test_kafka_d3_full_*
+- test_kafka_d3_full_*
 
-test_kafka_d0_full_*
+- test_kafka_d0_full_*
 
-test_kafka_d0_half_*
+- test_kafka_d0_half_*
 
-test_spark_d3_full_*
+- test_spark_d3_full_*
 
-test_spark_d0_full_*
+- test_spark_d0_full_*
 
-test_spark_d0_half_*
+- test_spark_d0_half_*
 
 The charts and reports created from the results are located in the "dataAfterAnalysis" folder.
 
