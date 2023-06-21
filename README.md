@@ -1,8 +1,8 @@
 # MsgBrokerSys
 
-The App is designed to compare Kafka Streams with Apache Spark Structed Streaming. The application was created based on multiple modules with their own pom files and set as the parent of the main pom. The exception is the Spark Streming application, which has Spring Boot 2.7.10 as a parent.
+The App is designed to compare Kafka Streams with Apache Spark Structured Streaming. The application was created based on multiple modules with their own pom files and set as the parent of the main pom. The exception is the Spark Streming application, which has Spring Boot 2.7.10 as a parent.
 
-On the test-0 branch there are tests that compare whether data from x samples are similar. On the test-1 to test-15 branch, tests will be performed in different configurations. More description of these branches in the README.md file.
+On the test-0 branch there are tests that compare whether data from x samples are similar. On the test-1 to test-6 branch, tests will be performed in different configurations. More description of these branches in the README.md file.
 
 The App includes a script written in python for data analysis. The name of the save files can be changed in the ConsumerConf class. The save files are used by a script (unfortunately not written according to the art, but simply to understand) that generates graphs and pdf reportd.
 
