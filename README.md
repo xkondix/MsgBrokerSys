@@ -63,4 +63,4 @@ Configurations are changed based on 2 classes, and look like this:
 
   ![image](https://github.com/xkondix/MsgBrokerSys/assets/52525583/afbe51f2-cfee-48ae-aa1b-0d7c7ce64928)
 
-  ![image](https://github.com/xkondix/MsgBrokerSys/assets/52525583/227aa69a-fca0-4313-8b8f-f347af4ef0dc)
+  ![image](https://github.com/xkondix/MsgBrokerSys/assets/52525583/07fb6580-36a3-4fcd-bb51-9048d88b7d6e)
