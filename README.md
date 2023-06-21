@@ -20,7 +20,7 @@ After filtering out the values and forwarding only those above the current avera
 In the case of Kafka, I used transformValues to store the state. This method is deprecated, but it works well. I did not use the newer processValues method because I would have had to upgrade the Kafka versions, and I did not want to do that. I think I missed this FixedKeyContextualProcessor class, more here https://cwiki.apache.org/confluence/display/KAFKA/KIP-820%3A+Extend+KStream+process+with+new+Processor+API?fbclid=IwAR0xCuQ17UlNYHyOW-hrQlob_6WTXDsLv6RHoujPH9fPgyJxvRgmueYDxR8
 
 ### Spark Structured Streaming
-In Spark, unfortunately, I was not able to use the method to hold the state. I tried to implement the MapGroupsWithStateFunction, but I fell down, and I did not want to waste time is I used java variables.
+In Spark, unfortunately, I was not able to use the method to hold the state. I tried to implement the MapGroupsWithStateFunction, but I fell down, and I did not want to waste time, so I used java variables.
 This is not the best solution, but it allowed me to run a test.
 
 ### Problems
