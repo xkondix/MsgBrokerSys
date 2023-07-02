@@ -125,16 +125,16 @@ if(coutKafkaDelay3Full > 0 ):
     #kafkaDelay3Full Histogram
     plt.hist(kafkaDelay3FullResults, bins=100)
     plt.title('Histogram Kafka opóźnienia 3 ms - Pełny zbiór danych')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullHistogram.png')
     plt.clf()
 
     #kafkaDelay3Full Line Chart
     plt.plot(kafkaDelay3FullResults)
     plt.title('Wykres liniowy Kafka opóźnienia 3 ms - Pełny zbiór danych')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullLine.png')
     plt.clf()
 
@@ -148,32 +148,32 @@ if(coutKafkaDelay3Full > 0 ):
     #kafkaDelay3Full filtered Histogram
     plt.hist(kafkaDelay3FullFilteredData, bins=100)
     plt.title('Histogram Kafka opóźnienia 3 ms - Pełny zbiór danych po filtrowaniu')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullFiltredHistogram.png')
     plt.clf()
 
     # kafkaDelay3Full filtered Line Chart
     plt.plot(kafkaDelay3FullFilteredData)
     plt.title('Wykres liniowy Kafka opóźnienia 3 ms - Pełny zbiór danych po filtrowaniu')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullFiltredLine.png')
     plt.clf()
 
     #kafkaDelay3FullValue Line Chart
     plt.plot(kafkaDelay3FullValueResults)
     plt.title('Wykres jakości powietrza')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullValueLine.png')
     plt.clf()
 
     #kafkaDelay3FullValueAverage Line Chart
     plt.plot(kafkaDelay3FullValueAverageResults)
     plt.title('Wykres jakości powietrza (Średnia)')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullValueAverageLine.png')
     plt.clf()
 
@@ -313,16 +313,16 @@ if coutKafkaDelay0Full > 0:
     # kafkaDelay0Full Histogram
     plt.hist(kafkaDelay0FullResults, bins=100)
     plt.title('Histogram Kafka opóźnienia  0ms - Pełny zbiór danych')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullHistogram.png')
     plt.clf()
 
     # kafkaDelay0Full Line Chart
     plt.plot(kafkaDelay0FullResults)
     plt.title('Wykres liniowy Kafka opóźnienia 0ms - Pełny zbiór danych')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullLine.png')
     plt.clf()
 
@@ -336,32 +336,32 @@ if coutKafkaDelay0Full > 0:
     # kafkaDelay0Full filtered Histogram
     plt.hist(kafkaDelay0FullFilteredData, bins=100)
     plt.title('Histogram Kafka opóźnienia 0ms - Pełny zbiór danych po filtrowaniu')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullFiltredHistogram.png')
     plt.clf()
 
     # kafkaDelay0Full filtered Line Chart
     plt.plot(kafkaDelay0FullFilteredData)
     plt.title('Wykres liniowy Kafka opóźnienia 0ms - Pełny zbiór danych po filtrowaniu')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullFiltredLine.png')
     plt.clf()
 
     #kafkaDelay0FullValue Line Chart
     plt.plot(kafkaDelay0FullValueResults)
     plt.title('Wykres jakości powietrza')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValueLine.png')
     plt.clf()
 
     #kafkaDelay0FullValueAverage Line Chart
     plt.plot(kafkaDelay0FullValueAverageResults)
     plt.title('Wykres jakości powietrza (Średnia)')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValueAverageLine.png')
     plt.clf()
 
@@ -500,16 +500,16 @@ if coutKafkaDelay0Half > 0:
     # kafkaDelay0Half Histogram
     plt.hist(kafkaDelay0HalfResults, bins=100)
     plt.title('Histogram Kafka opóźnienia  0ms - Półzbiór danych')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfHistogram.png')
     plt.clf()
 
     # kafkaDelay0Half Line Chart
     plt.plot(kafkaDelay0HalfResults)
     plt.title('Wykres liniowy Kafka opóźnienia 0ms - Półzbiór danych')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfLine.png')
     plt.clf()
 
@@ -523,31 +523,31 @@ if coutKafkaDelay0Half > 0:
     # kafkaDelay0Half filtered Histogram
     plt.hist(kafkaDelay0HalfFilteredData, bins=100)
     plt.title('Histogram Kafka opóźnienia 0ms - Półzbiór danych po filtrowaniu')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfFiltredHistogram.png')
     plt.clf()
 
     # kafkaDelay0Half filtered Line Chart
     plt.plot(kafkaDelay0HalfFilteredData)
     plt.title('Wykres liniowy Kafka opóźnienia 0ms - Półzbiór danych po filtrowaniu')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfFiltredLine.png')
     plt.clf()
 
     #kafkaDelay0HalfValue Line Chart
     plt.plot(kafkaDelay0HalfValueResults)
     plt.title('Wykres jakości powietrza')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValueLine.png')
     plt.clf()
 
     plt.plot(kafkaDelay0HalfValueAverageResults)
     plt.title('Wykres jakości powietrza (Średnia)')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValueAverageLine.png')
     plt.clf()
 
@@ -685,16 +685,16 @@ if coutSparkDelay3Full > 0:
     # sparkDelay3Full Histogram
     plt.hist(sparkDelay3FullResults, bins=100)
     plt.title('Histogram Spark opóźnienia  3ms - Pełny zbiór danych')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullHistogram.png')
     plt.clf()
 
     # sparkDelay3Full Line Chart
     plt.plot(sparkDelay3FullResults)
     plt.title('Wykres liniowy Spark opóźnienia 3ms - Pełny zbiór danych')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullLine.png')
     plt.clf()
 
@@ -708,32 +708,32 @@ if coutSparkDelay3Full > 0:
     # sparkDelay3Full filtered Histogram
     plt.hist(sparkDelay3FullFilteredData, bins=100)
     plt.title('Histogram Spark opóźnienia 3ms - Pełny zbiór danych po filtrowaniu')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullFiltredHistogram.png')
     plt.clf()
 
     # sparkDelay3Full filtered Line Chart
     plt.plot(sparkDelay3FullFilteredData)
     plt.title('Wykres liniowy Spark opóźnienia 3ms - Pełny zbiór danych po filtrowaniu')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullFiltredLine.png')
     plt.clf()
 
     #sparkDelay3FullValue Line Chart
     plt.plot(sparkDelay3FullValueResults)
     plt.title('Wykres jakości powietrza')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullValueLine.png')
     plt.clf()
 
     #sparkDelay3FullValueAverage Line Chart
     plt.plot(sparkDelay3FullValueAverageResults)
     plt.title('Wykres jakości powietrza (Średnia)')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullValueAverageLine.png')
     plt.clf()
 
@@ -872,16 +872,16 @@ if coutSparkDelay0Full > 0:
     # sparkDelay0Full Histogram
     plt.hist(sparkDelay0FullResults, bins=100)
     plt.title('Histogram Spark opóźnienia  0ms - Pełny zbiór danych')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullHistogram.png')
     plt.clf()
 
     # sparkDelay0Full Line Chart
     plt.plot(sparkDelay0FullResults)
     plt.title('Wykres liniowy Spark opóźnienia 0ms - Pełny zbiór danych')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullLine.png')
     plt.clf()
 
@@ -895,32 +895,32 @@ if coutSparkDelay0Full > 0:
     # sparkDelay0Full filtered Histogram
     plt.hist(sparkDelay0FullFilteredData, bins=100)
     plt.title('Histogram Spark opóźnienia 0ms - Pełny zbiór danych po filtrowaniu')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullFilteredHistogram.png')
     plt.clf()
 
     # sparkDelay0Full filtered Line Chart
     plt.plot(sparkDelay0FullFilteredData)
     plt.title('Wykres liniowy Spark opóźnienia 0ms - Pełny zbiór danych po filtrowaniu')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullFiltredLine.png')
     plt.clf()
 
     #sparkDelay0FullValue Line Chart
     plt.plot(sparkDelay0FullValueResults)
     plt.title('Wykres jakości powietrza')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullValueLine.png')
     plt.clf()
 
     #sparkDelay0FullValueAverage Line Chart
     plt.plot(sparkDelay0FullValueAverageResults)
     plt.title('Wykres jakości powietrza (Średnia)')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullValueAverageLine.png')
     plt.clf()
 
@@ -1059,16 +1059,16 @@ if coutSparkDelay0Half > 0:
     # sparkDelay0Half Histogram
     plt.hist(sparkDelay0HalfResults, bins=100)
     plt.title('Histogram Spark opóźnienia  0ms - Półzbiór danych')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalfHistogram.png')
     plt.clf()
 
     # sparkDelay0Half Line Chart
     plt.plot(sparkDelay0HalfResults)
     plt.title('Wykres liniowy Spark opóźnienia 0ms - Półzbiór danych')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalfLine.png')
     plt.clf()
 
@@ -1082,32 +1082,32 @@ if coutSparkDelay0Half > 0:
     # sparkDelay0Half filtered Histogram
     plt.hist(sparkDelay0HalfFilteredData, bins=100)
     plt.title('Histogram Spark opóźnienia 0ms - Półzbiór danych po filtrowaniu')
-    plt.xlabel('Czas (s)')
-    plt.ylabel('Liczba próbek')
+    plt.xlabel('Czas [s]')
+    plt.ylabel('Liczba wystąpnień')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalfFiltredHistogram.png')
     plt.clf()
 
     # sparkDelay0Half filtered Line Chart
     plt.plot(sparkDelay0HalfFilteredData)
     plt.title('Wykres liniowy Spark opóźnienia 0ms - Półzbiór danych po filtrowaniu')
-    plt.ylabel('Czas (s)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('Czas przetworzenia [s]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalfFiltredLine.png')
     plt.clf()
 
     #sparkDelay0HalfValue Line Chart
     plt.plot(sparkDelay0HalfValueResults)
     plt.title('Wykres jakości powietrza')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueLine.png')
     plt.clf()
 
     #sparkDelay0HalfValueAverage Line Chart
     plt.plot(sparkDelay0HalfValueAverageResults)
     plt.title('Wykres jakości powietrza (Średnia)')
-    plt.ylabel('PM2.5 (ug/m3)')
-    plt.xlabel('Liczba próbek')
+    plt.ylabel('PM 2.5 [µg/m³]')
+    plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueAverageLine.png')
     plt.clf()
 
