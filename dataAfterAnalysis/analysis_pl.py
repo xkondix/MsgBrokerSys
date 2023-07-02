@@ -171,7 +171,7 @@ if(coutKafkaDelay3Full > 0 ):
 
     #kafkaDelay3FullValueAverage Line Chart
     plt.plot(kafkaDelay3FullValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+#     plt.title('Wykres jakości powietrza (Średnia)')
     plt.ylabel('PM 2.5 [µg/m³]')
     plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay3FullValueAverageLine.png')
@@ -359,7 +359,7 @@ if coutKafkaDelay0Full > 0:
 
     #kafkaDelay0FullValueAverage Line Chart
     plt.plot(kafkaDelay0FullValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+#     plt.title('Wykres jakości powietrza (Średnia)')
     plt.ylabel('PM 2.5 [µg/m³]')
     plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0FullValueAverageLine.png')
@@ -545,7 +545,7 @@ if coutKafkaDelay0Half > 0:
     plt.clf()
 
     plt.plot(kafkaDelay0HalfValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+#     plt.title('Wykres jakości powietrza (Średnia)')
     plt.ylabel('PM 2.5 [µg/m³]')
     plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'kafkaDelay0HalfValueAverageLine.png')
@@ -731,7 +731,7 @@ if coutSparkDelay3Full > 0:
 
     #sparkDelay3FullValueAverage Line Chart
     plt.plot(sparkDelay3FullValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+#     plt.title('Wykres jakości powietrza (Średnia)')
     plt.ylabel('PM 2.5 [µg/m³]')
     plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay3FullValueAverageLine.png')
@@ -918,7 +918,7 @@ if coutSparkDelay0Full > 0:
 
     #sparkDelay0FullValueAverage Line Chart
     plt.plot(sparkDelay0FullValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+#     plt.title('Wykres jakości powietrza (Średnia)')
     plt.ylabel('PM 2.5 [µg/m³]')
     plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0FullValueAverageLine.png')
@@ -1105,7 +1105,7 @@ if coutSparkDelay0Half > 0:
 
     #sparkDelay0HalfValueAverage Line Chart
     plt.plot(sparkDelay0HalfValueAverageResults)
-    plt.title('Wykres jakości powietrza (Średnia)')
+#     plt.title('Wykres jakości powietrza (Średnia)')
     plt.ylabel('PM 2.5 [µg/m³]')
     plt.xlabel('Numer rekordu')
     plt.savefig(pathToSaveCharts + 'sparkDelay0HalValueAverageLine.png')
