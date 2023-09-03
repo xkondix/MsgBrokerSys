@@ -42,7 +42,8 @@ public class KafkaStreamsProcess {
                             }
                         };
                     }
-                });
+                })
+                .peek((key, value) -> System.out.println(value));
     }
 
 

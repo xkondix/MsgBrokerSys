@@ -15,6 +15,7 @@ spring.cloud.stream:
         producer:
           configuration:
             key.serializer: org.apache.kafka.common.serialization.StringSerializer
+#            value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
             value.serializer: com.kowalczyk.konrad.utils.DataSerializer
     binder:
       brokers:

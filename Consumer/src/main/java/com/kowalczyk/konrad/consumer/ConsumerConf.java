@@ -38,7 +38,7 @@ public class ConsumerConf {
 
         // first create file object for file placed at location
         // specified by filepath
-        File file = new File("results\\test_kafka_1.csv");
+        File file = new File("results\\test_1.csv");
         try {
             // create FileWriter object with file as parameter
             FileWriter outputfile = new FileWriter(file, true);

@@ -6,6 +6,10 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataModel {
@@ -79,14 +83,37 @@ public class DataModel {
     }
 
 
+//    @Override
+//    public String toString() {
+//        String json = "";
+//        try {
+//            json = objectWriter.writeValueAsString(this);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return json;
+//    }
+
+
     @Override
     public String toString() {
-        String json = "";
-        try {
-            json = objectWriter.writeValueAsString(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return json;
+        return "DataModel{" +
+                "date='" + date + '\'' +
+                ", value=" + value +
+                ", positionCode='" + positionCode + '\'' +
+                ", unit='" + unit + '\'' +
+                ", averagingTime='" + averagingTime + '\'' +
+                ", indicator='" + indicator + '\'' +
+                ", stationCode='" + stationCode + '\'' +
+                ", timestampSend=" + convertTime(timestampSend) +
+                ", timestampConsumer=" + convertTime(timestampConsumer) +
+                ", averagingValue="  + averagingValue +
+                '}';
+    }
+
+    public String convertTime(long time){
+        Date date = new Date(time);
+        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+        return format.format(date);
     }
 }
