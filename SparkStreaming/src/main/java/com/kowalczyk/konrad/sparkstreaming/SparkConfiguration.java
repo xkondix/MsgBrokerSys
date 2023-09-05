@@ -66,7 +66,7 @@ public class SparkConfiguration {
         Dataset<Row> df = sparkSession()
                 .readStream()
                 .format("kafka")
-                .option("kafka.bootstrap.servers", "localhost:9092")
+                .option("kafka.bootstrap.servers", "localhost:9092,localhost:9091,localhost:9093")
                 .option("subscribe", "Order")
                 .option("groupId", "stream")
                 .option("startingOffsets", "latest")
