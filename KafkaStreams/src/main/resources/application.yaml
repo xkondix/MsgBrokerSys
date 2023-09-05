@@ -27,6 +27,7 @@ spring.cloud.stream:
             key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
             value.deserializer: com.kowalczyk.konrad.utils.DataDeserializer
     binder:
+      applicationId: kafkastream
       brokers:
         - localhost:9091
         - localhost:9092
