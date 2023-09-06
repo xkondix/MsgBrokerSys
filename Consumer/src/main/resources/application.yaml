@@ -7,7 +7,6 @@ spring.cloud.stream:
   bindings:
     consume-in-0:
       destination: Summary
-      group: consumer
       consumer:
         use-native-encoding: true
   kafka:

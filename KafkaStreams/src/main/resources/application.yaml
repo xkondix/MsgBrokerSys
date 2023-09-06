@@ -9,7 +9,6 @@ spring.cloud.stream:
       destination: Order
       consumer:
         use-native-encoding: true
-      group: stream
     process-out-0:
       destination: Summary
       producer:
