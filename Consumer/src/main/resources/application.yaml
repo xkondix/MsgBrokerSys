@@ -7,8 +7,7 @@ spring.cloud.stream:
   bindings:
     consume-in-0:
       destination: Summary
-      consumer:
-        use-native-encoding: true
+      group: consumer
   kafka:
     bindings:
       consume-in-0:
@@ -16,9 +15,9 @@ spring.cloud.stream:
           configuration:
             key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
             value.deserializer: com.kowalczyk.konrad.utils.DataDeserializer
-    binder:
-      applicationId: consumer
-      brokers:
-        - localhost:9091
-        - localhost:9092
-        - localhost:9093
+      binder:
+        applicationId: consumer
+        brokers:
+          - localhost:9091
+          - localhost:9092
+          - localhost:9093

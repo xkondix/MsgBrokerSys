@@ -1,33 +1,29 @@
 server:
-  port : 0
+  port: 0
 
-spring.cloud.stream:
-  function:
-    definition: process
-  bindings:
-    process-in-0:
-      destination: Order
-      consumer:
-        use-native-encoding: true
-    process-out-0:
-      destination: Summary
-      producer:
-        use-native-encoding: true
-  kafka:
-    bindings:
-      process-out-0:
-        producer:
-          configuration:
-            key.serializer: org.apache.kafka.common.serialization.StringSerializer
-            value.serializer: com.kowalczyk.konrad.utils.DataSerializer
-      process-in-0:
-        consumer:
-          configuration:
-            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
-            value.deserializer: com.kowalczyk.konrad.utils.DataDeserializer
-    binder:
-      applicationId: kafkastream
-      brokers:
-        - localhost:9091
-        - localhost:9092
-        - localhost:9093
+spring:
+  cloud:
+    stream:
+      function:
+        definition: process
+      bindings:
+        process-in-0:
+          destination: Order
+        process-out-0:
+          destination: Summary
+      kafka:
+        streams:
+          bindings:
+            process-out-0:
+              producer:
+                configuration:
+                  key.serializer: org.apache.kafka.common.serialization.Serdes$StringSerde
+                  value.serializer: com.kowalczyk.konrad.utils.DataSerde
+            process-in-0:
+              consumer:
+                configuration:
+                  key.deserializer: org.apache.kafka.common.serialization.Serdes$StringSerde
+                  value.deserializer: com.kowalczyk.konrad.utils.DataSerde
+          binder:
+            applicationId: kafkastream
+            brokers: localhost:9091,localhost:9092,localhost:9093

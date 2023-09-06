@@ -3,7 +3,9 @@ package com.kowalczyk.konrad.utils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.text.Format;
@@ -12,6 +14,7 @@ import java.util.Date;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor()
 public class DataModel {
 
     private final static ObjectWriter objectWriter
@@ -64,9 +67,6 @@ public class DataModel {
         this.timestampSend = timestampSend;
         this.timestampConsumer = timestampConsumer;
         this.averagingValue = averagingValue;
-    }
-
-    public DataModel() {
     }
 
     public String[] getList() {

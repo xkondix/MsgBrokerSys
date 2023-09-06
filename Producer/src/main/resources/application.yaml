@@ -17,9 +17,9 @@ spring.cloud.stream:
             key.serializer: org.apache.kafka.common.serialization.StringSerializer
 #            value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
             value.serializer: com.kowalczyk.konrad.utils.DataSerializer
-    binder:
-      applicationId: producer
-      brokers:
-        - localhost:9091
-        - localhost:9092
-        - localhost:9093
+      binder:
+        applicationId: producer
+        brokers:
+          - localhost:9091
+          - localhost:9092
+          - localhost:9093

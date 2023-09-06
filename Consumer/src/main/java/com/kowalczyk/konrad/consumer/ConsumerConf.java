@@ -3,9 +3,10 @@ package com.kowalczyk.konrad.consumer;
 
 import com.kowalczyk.konrad.utils.DataModel;
 import com.opencsv.CSVWriter;
-import org.apache.kafka.streams.kstream.KStream;
+//import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.Message;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -21,12 +22,19 @@ import static com.kowalczyk.konrad.utils.CurrentTime.getCurrentTimeInstance;
 public class ConsumerConf {
 
     @Bean
-    public Consumer<KStream<String, DataModel>> consume() {
-        return stream -> stream
-                .peek((key, value) -> updateTimestampConsume.apply(value))
-                .peek((key, value) -> writeDataAtOnce(value))
-                .foreach((key, value) -> System.out.println("Consumed : " + value));
+    public Consumer<DataModel> consume() {
+        return dataModel -> {
+            System.out.println("Consume: " + dataModel);
+        };
     }
+
+//    @Bean
+//    public Consumer<KStream<String, DataModel>> consume() {
+//        return stream -> stream
+//                .peek((key, value) -> updateTimestampConsume.apply(value))
+//                .peek((key, value) -> writeDataAtOnce(value))
+//                .foreach((key, value) -> System.out.println("Consumed : " + value));
+//    }
 
     private final Function<DataModel, DataModel> updateTimestampConsume = data -> {
         data.setTimestampConsumer(getCurrentTimeInstance().getCurrentTimeInMillis());

@@ -26,8 +26,11 @@ public class Producer {
     public Supplier<Flux<DataModel>> sendMessage() {
         return () -> Flux.fromIterable(dataSource.getDataList())
                 .map(updateTimestampSend)
-                .log();
+                .doOnNext(dataModel -> {
+                    System.out.println("Produce: " + dataModel);
+                });
 //                .delayElements(Duration.ofMillis(3));
+//                .log();
     }
 
     private final Function<DataModel, DataModel> updateTimestampSend = data -> {
