@@ -81,7 +81,6 @@ public class SparkConfiguration {
                     sum += value;
                     count++;
                     double average = sum / count;
-
                     Row updatedRow = RowFactory.create(
                             null,
                             (String) row.get(1),
@@ -95,7 +94,7 @@ public class SparkConfiguration {
                             (Long) row.get(9),
                             (Double) average
                     );
-
+                    System.out.println("Spark: " + updatedRow);
                     return updatedRow;
                 }, RowEncoder.apply(df.schema()));
 
