@@ -27,9 +27,7 @@ public class SparkConfiguration {
     public SparkConf sparkConf() {
         return new SparkConf()
                 .setAppName("Spark Streaming")
-                .set("spark.driver.allowMultipleContexts", "true")
-                .setMaster("local")
-                .set("spark.executor.extraJavaOptions", "--add-modules java.se");
+                .setMaster("local");
     }
 
     @Bean
@@ -68,7 +66,7 @@ public class SparkConfiguration {
                 .format("kafka")
                 .option("kafka.bootstrap.servers", "localhost:9092,localhost:9091,localhost:9093")
                 .option("subscribe", "Order")
-                .option("groupId", "stream")
+                .option("groupId", "spark-stream")
                 .option("startingOffsets", "latest")
                 .option("failOnDataLoss", "true")
                 .load()
