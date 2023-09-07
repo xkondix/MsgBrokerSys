@@ -24,6 +24,7 @@ public class ConsumerConf {
     @Bean
     public Consumer<DataModel> consume() {
         return dataModel -> {
+            dataModel.setTimestampConsumer(getCurrentTimeInstance().getCurrentTimeInMillis());
             System.out.println("Consume: " + dataModel);
         };
     }
